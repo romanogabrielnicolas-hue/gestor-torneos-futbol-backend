@@ -1,7 +1,7 @@
 {
   "name": "gestor-torneos-futbol-backend",
   "version": "0.0.1",
-  "description": "",
+  "description": "<p align=\"center\">\r   <a href=\"http://nestjs.com/\" target=\"blank\"><img src=\"https://nestjs.com/img/logo-small.svg\" width=\"120\" alt=\"Nest Logo\" /></a>\r </p>",
   "author": "",
   "private": true,
   "license": "UNLICENSED",
@@ -23,6 +23,7 @@
   "dependencies": {
     "@nestjs/common": "^12.0.1",
     "@nestjs/core": "^12.0.1",
+    "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^12.0.1",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"
@@ -46,6 +47,20 @@
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^6.0.2"
-  }
+    "typescript": "^6.0.3"
+  },
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/romanogabrielnicolas-hue/gestor-torneos-futbol-backend.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/romanogabrielnicolas-hue/gestor-torneos-futbol-backend/issues"
+  },
+  "homepage": "https://github.com/romanogabrielnicolas-hue/gestor-torneos-futbol-backend#readme"
 }

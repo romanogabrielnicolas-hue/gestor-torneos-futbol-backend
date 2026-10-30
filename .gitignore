@@ -1,0 +1,17 @@
+# Dependencias
+node_modules/
+
+# Archivos generados
+dist/
+coverage/
+
+# Variables de entorno
+.env
+.env.*
+
+# Archivos del editor
+.vscode/
+
+# Ejercicios externos al backend
+typescript-ejercicios/
+*.tsbuildinfo
