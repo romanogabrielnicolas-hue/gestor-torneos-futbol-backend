@@ -1,26 +1,62 @@
-import { Injectable } from '@nestjs/common';
+
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+
+import { Partido } from './entities/partido.entity';
 import { CreatePartidoDto } from './dto/create-partido.dto';
 import { UpdatePartidoDto } from './dto/update-partido.dto';
 
 @Injectable()
 export class PartidosService {
+  constructor(
+    @InjectRepository(Partido)
+    private readonly partidosRepository: Repository<Partido>,
+  ) {}
+
   create(createPartidoDto: CreatePartidoDto) {
-    return 'This action adds a new partido';
+    const partido = this.partidosRepository.create(createPartidoDto);
+    return this.partidosRepository.save(partido);
   }
 
   findAll() {
-    return `This action returns all partidos`;
+    return this.partidosRepository.find({
+      relations: {
+        equipoLocal: true,
+        equipoVisitante: true,
+      },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} partido`;
+  async findOne(id: number) {
+    const partido = await this.partidosRepository.findOne({
+      where: { id },
+      relations: {
+        equipoLocal: true,
+        equipoVisitante: true,
+      },
+    });
+
+    if (!partido) {
+      throw new NotFoundException(`Partido con ID ${id} no encontrado`);
+    }
+
+    return partido;
   }
 
-  update(id: number, updatePartidoDto: UpdatePartidoDto) {
-    return `This action updates a #${id} partido`;
+  async update(id: number, updatePartidoDto: UpdatePartidoDto) {
+    const partido = await this.findOne(id);
+
+    Object.assign(partido, updatePartidoDto);
+
+    return this.partidosRepository.save(partido);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} partido`;
+  async remove(id: number) {
+    const partido = await this.findOne(id);
+
+    await this.partidosRepository.remove(partido);
+
+    return { message: 'Partido eliminado correctamente' };
   }
 }

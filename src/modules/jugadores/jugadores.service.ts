@@ -1,26 +1,60 @@
-import { Injectable } from '@nestjs/common';
+
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+
+import { Jugador } from './entities/jugadore.entity';
 import { CreateJugadoreDto } from './dto/create-jugadore.dto';
 import { UpdateJugadoreDto } from './dto/update-jugadore.dto';
 
 @Injectable()
 export class JugadoresService {
+  constructor(
+    @InjectRepository(Jugador)
+    private readonly jugadoresRepository: Repository<Jugador>,
+  ) {}
+
   create(createJugadoreDto: CreateJugadoreDto) {
-    return 'This action adds a new jugadore';
+    const jugador = this.jugadoresRepository.create(createJugadoreDto);
+    return this.jugadoresRepository.save(jugador);
   }
 
   findAll() {
-    return `This action returns all jugadores`;
+    return this.jugadoresRepository.find({
+      relations: {
+        equipo: true,
+      },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} jugadore`;
+  async findOne(id: number) {
+    const jugador = await this.jugadoresRepository.findOne({
+      where: { id },
+      relations: {
+        equipo: true,
+      },
+    });
+
+    if (!jugador) {
+      throw new NotFoundException(`Jugador con ID ${id} no encontrado`);
+    }
+
+    return jugador;
   }
 
-  update(id: number, updateJugadoreDto: UpdateJugadoreDto) {
-    return `This action updates a #${id} jugadore`;
+  async update(id: number, updateJugadoreDto: UpdateJugadoreDto) {
+    const jugador = await this.findOne(id);
+
+    Object.assign(jugador, updateJugadoreDto);
+
+    return this.jugadoresRepository.save(jugador);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} jugadore`;
+  async remove(id: number) {
+    const jugador = await this.findOne(id);
+
+    await this.jugadoresRepository.remove(jugador);
+
+    return { message: 'Jugador eliminado correctamente' };
   }
 }
