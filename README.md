@@ -1,132 +1,526 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+&#x20;\<div align="center">
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# ⚽ Gestor de Torneos de Fútbol
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+### Backend REST API — NestJS + TypeScript + MySQL
 
-## Description
+API REST para la gestión de equipos, jugadores y partidos de un torneo de fútbol. Desarrollada con NestJS, TypeScript y TypeORM, utilizando MySQL como sistema de gestión de base de datos.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+\<br>
 
-## Project setup
+\
 
-```bash
-$ npm install
+\</div>
+
+---
+
+## 📋 Tabla de contenido
+
+- [⚽ Descripción del proyecto](#-descripción-del-proyecto)
+- [✨ Características](#-características)
+- [🧩 Arquitectura y módulos](#-arquitectura-y-módulos)
+- [🛠️ Tecnologías utilizadas](#️-tecnologías-utilizadas)
+- [🗄️ Base de datos](#️-base-de-datos)
+- [🔗 Relaciones entre tablas](#-relaciones-entre-tablas)
+- [🌐 Endpoints de la API](#-endpoints-de-la-api)
+- [🚀 Instalación](#-instalación)
+- [⚙️ Variables de entorno](#️-variables-de-entorno)
+- [💻 Ejecución del proyecto](#-ejecución-del-proyecto)
+- [📁 Estructura del proyecto](#-estructura-del-proyecto)
+- [🌿 Organización de Git](#-organización-de-git)
+- [📌 Estado del proyecto](#-estado-del-proyecto)
+- [👨‍💻 Autor](#-autor)
+
+---
+
+## ⚽ Descripción del proyecto
+
+**Gestor de Torneos de Fútbol** es un proyecto backend desarrollado para administrar la información de un torneo de fútbol mediante una API REST.
+
+El sistema está organizado en módulos independientes, siguiendo la arquitectura modular de NestJS. Cada módulo contiene sus propios controladores, servicios, entidades y DTO.
+
+La aplicación utiliza **MySQL** para almacenar la información y **TypeORM** para gestionar la comunicación entre el backend y la base de datos.
+
+El proyecto contempla tres recursos principales:
+
+- ⚽ Equipos.
+- 👤 Jugadores.
+- 📅 Partidos.
+
+## ✨ Características
+
+### ⚽ Gestión de equipos
+
+- Registrar nuevos equipos.
+- Consultar todos los equipos.
+- Consultar un equipo por su identificador.
+- Actualizar información de un equipo.
+- Eliminar equipos.
+- Consultar los jugadores asociados a cada equipo.
+
+### 👤 Gestión de jugadores
+
+- Registrar jugadores.
+- Almacenar nombre, DNI, edad y posición.
+- Asignar un jugador a un equipo.
+- Registrar el número de camiseta.
+- Consultar jugadores.
+- Consultar un jugador por su identificador.
+- Actualizar y eliminar jugadores.
+
+### 📅 Gestión de partidos
+
+- Registrar partidos entre dos equipos.
+- Establecer equipo local y visitante.
+- Guardar fecha y hora del encuentro.
+- Registrar la cancha donde se juega.
+- Consultar todos los partidos.
+- Consultar un partido por su identificador.
+- Actualizar y eliminar partidos.
+
+### 🔐 Integridad de los datos
+
+- Claves primarias autoincrementales.
+- Claves foráneas para relacionar las tablas.
+- Restricciones para evitar DNI duplicados.
+- Restricción para evitar números de camiseta repetidos dentro de un mismo equipo.
+- Restricción para impedir partidos entre un equipo y sí mismo.
+- Protección de relaciones mediante restricciones de integridad referencial.
+
+---
+
+## 🧩 Arquitectura y módulos
+
+El backend utiliza una arquitectura modular basada en NestJS.
+
+Cada módulo separa las responsabilidades de la aplicación:
+
+| Componente | Responsabilidad                                    |
+| ---------- | -------------------------------------------------- |
+| Controller | Recibe las solicitudes HTTP y devuelve respuestas. |
+| Service    | Contiene la lógica de negocio y operaciones CRUD.  |
+| Entity     | Representa las tablas de la base de datos.         |
+| DTO        | Define la estructura de los datos recibidos.       |
+| Module     | Agrupa e integra los componentes de cada recurso.  |
+
+### Módulo de equipos
+
+`EquiposModule`
+
+Se encarga de gestionar los equipos y su relación con los jugadores.
+
+### Módulo de jugadores
+
+`JugadoresModule`
+
+Administra los jugadores y la relación con el equipo al que pertenecen.
+
+### Módulo de partidos
+
+`PartidosModule`
+
+Gestiona los encuentros y las relaciones con los equipos local y visitante.
+
+### Módulo principal
+
+`AppModule`
+
+Es el módulo principal de la aplicación. Integra los módulos de equipos, jugadores y partidos, además de configurar las variables de entorno y la conexión con MySQL mediante TypeORM.
+
+---
+
+## 🛠️ Tecnologías utilizadas
+
+| Tecnología     | Utilización                                     |
+| -------------- | ----------------------------------------------- |
+| NestJS         | Framework para desarrollar el backend.          |
+| TypeScript     | Lenguaje de programación.                       |
+| Node.js        | Entorno de ejecución.                           |
+| MySQL          | Sistema de gestión de base de datos.            |
+| XAMPP          | Entorno local para ejecutar MySQL.              |
+| phpMyAdmin     | Administración visual de la base de datos.      |
+| TypeORM        | Mapeo objeto-relacional (ORM).                  |
+| mysql2         | Driver de conexión con MySQL.                   |
+| @nestjs/config | Gestión de variables de entorno.                |
+| Git            | Control de versiones.                           |
+| GitHub         | Alojamiento del repositorio.                    |
+| Postman        | Herramienta prevista para probar los endpoints. |
+
+---
+
+## 🗄️ Base de datos
+
+El proyecto utiliza una base de datos relacional llamada:
+
+`gestor_torneos`
+
+La base de datos está compuesta por tres tablas principales.
+
+### Tabla: equipos
+
+Almacena la información de los equipos participantes.
+
+| Campo  | Tipo         | Descripción              |
+| ------ | ------------ | ------------------------ |
+| id     | INT          | Identificador principal. |
+| nombre | VARCHAR(100) | Nombre del equipo.       |
+| color  | VARCHAR(50)  | Color del equipo.        |
+
+### Tabla: jugadores
+
+Almacena los datos de los jugadores y su equipo correspondiente.
+
+| Campo     | Tipo         | Descripción                   |
+| --------- | ------------ | ----------------------------- |
+| id        | INT          | Identificador principal.      |
+| nombre    | VARCHAR(100) | Nombre del jugador.           |
+| dni       | VARCHAR(20)  | Documento de identidad único. |
+| edad      | INT          | Edad del jugador.             |
+| posicion  | VARCHAR(50)  | Posición en el campo.         |
+| equipo_id | INT          | Referencia al equipo.         |
+| numero    | INT          | Número de camiseta.           |
+
+### Tabla: partidos
+
+Almacena los encuentros programados entre los equipos.
+
+| Campo               | Tipo         | Descripción                         |
+| ------------------- | ------------ | ----------------------------------- |
+| id                  | INT          | Identificador principal.            |
+| equipo_local_id     | INT          | Identificador del equipo local.     |
+| equipo_visitante_id | INT          | Identificador del equipo visitante. |
+| fecha               | DATE         | Fecha del encuentro.                |
+| hora                | TIME         | Hora del encuentro.                 |
+| cancha              | VARCHAR(100) | Lugar donde se juega.               |
+
+---
+
+## 🔗 Relaciones entre tablas
+
+La base de datos utiliza relaciones para mantener la integridad de la información.
+
+### Equipos y jugadores
+
+Un equipo puede tener muchos jugadores, pero cada jugador pertenece a un único equipo.
+
+**Relación: uno a muchos (1).**
+
+### Equipos y partidos
+
+Cada partido tiene dos referencias a la tabla equipos:
+
+- Equipo local.
+- Equipo visitante.
+
+Un equipo puede participar en distintos partidos, tanto como local como visitante.
+
+**Relación: uno a muchos (1) desde cada referencia de equipo.**
+
+### Diagrama conceptual
+
+```text
+             ┌──────────────────┐
+             │      EQUIPOS     │
+             ├──────────────────┤
+             │ id (PK)          │
+             │ nombre           │
+             │ color            │
+             └────────┬─────────┘
+                      │
+               1      │      N
+                      │
+             ┌────────▼─────────┐
+             │    JUGADORES     │
+             ├──────────────────┤
+             │ id (PK)          │
+             │ nombre           │
+             │ dni              │
+             │ edad             │
+             │ posicion         │
+             │ equipo_id (FK)   │
+             │ numero           │
+             └──────────────────┘
+
+
+             ┌──────────────────┐
+             │      EQUIPOS     │
+             │    (equipo 1)    │
+             └────────┬─────────┘
+                      │
+                      │ equipo_local_id
+                      │
+             ┌────────▼─────────┐
+             │     PARTIDOS     │
+             ├──────────────────┤
+             │ id (PK)          │
+             │ equipo_local_id  │
+             │ equipo_visitante_id
+             │ fecha            │
+             │ hora             │
+             │ cancha           │
+             └────────▲─────────┘
+                      │
+                      │ equipo_visitante_id
+                      │
+             ┌────────┴─────────┐
+             │      EQUIPOS     │
+             │    (equipo 2)    │
+             └──────────────────┘
 ```
 
-## Compile and run the project
+---
+
+## 🌐 Endpoints de la API
+
+La API utiliza los métodos HTTP para realizar las operaciones CRUD (Crear, Leer, Actualizar y Eliminar).
+
+### ⚽ Equipos
+
+| Método | Endpoint       | Descripción                |
+| ------ | -------------- | -------------------------- |
+| GET    | `/equipos`     | Obtener todos los equipos. |
+| GET    | `/equipos/:id` | Obtener un equipo por ID.  |
+| POST   | `/equipos`     | Registrar un equipo.       |
+| PATCH  | `/equipos/:id` | Actualizar un equipo.      |
+| DELETE | `/equipos/:id` | Eliminar un equipo.        |
+
+### 👤 Jugadores
+
+| Método | Endpoint         | Descripción                  |
+| ------ | ---------------- | ---------------------------- |
+| GET    | `/jugadores`     | Obtener todos los jugadores. |
+| GET    | `/jugadores/:id` | Obtener un jugador por ID.   |
+| POST   | `/jugadores`     | Registrar un jugador.        |
+| PATCH  | `/jugadores/:id` | Actualizar un jugador.       |
+| DELETE | `/jugadores/:id` | Eliminar un jugador.         |
+
+### 📅 Partidos
+
+| Método | Endpoint        | Descripción                 |
+| ------ | --------------- | --------------------------- |
+| GET    | `/partidos`     | Obtener todos los partidos. |
+| GET    | `/partidos/:id` | Obtener un partido por ID.  |
+| POST   | `/partidos`     | Registrar un partido.       |
+| PATCH  | `/partidos/:id` | Actualizar un partido.      |
+| DELETE | `/partidos/:id` | Eliminar un partido.        |
+
+**URL local de la API:**
+
+`http://localhost:3000`
+
+---
+
+## 🚀 Instalación
+
+### Requisitos previos
+
+Antes de ejecutar el proyecto, es necesario tener instalado:
+
+- [Node.js](https://nodejs.org/)
+- [Git](https://git-scm.com/)
+- [XAMPP](https://www.apachefriends.org/)
+- [Visual Studio Code](https://code.visualstudio.com/)
+
+### 1. Clonar el repositorio
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+git clone https://github.com/romanogabrielnicolas-hue/gestor-torneos-futbol-backend.git
 ```
 
-## Run tests
+### 2. Ingresar al proyecto
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+cd gestor-torneos-futbol-backend
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### 3. Instalar dependencias
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+npm install
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 4. Crear la base de datos
 
-## Observability
+1. Abrir XAMPP.
+2. Iniciar el servicio MySQL.
+3. Ingresar a phpMyAdmin.
+4. Crear la base de datos `gestor_torneos`.
+5. Crear las tablas `equipos`, `jugadores` y `partidos`, incluyendo sus claves primarias, relaciones y restricciones.
 
-In production applications, observability is essential for understanding how your system behaves, detecting issues early, and maintaining reliable performance.
+### 5. Configurar las variables de entorno
 
-[NestJS Observe](https://observe.nestjs.com) automatically instruments your NestJS application, giving you deep visibility into your system with minimal setup:
+Crear un archivo `.env` en la raíz del proyecto.
 
-- **Distributed tracing:** Follow requests across services and understand how they flow through your system.
-- **Waterfall analysis:** Visualize request execution and identify slow operations, bottlenecks, and unexpected delays.
-- **Performance analysis:** Analyze application performance in real time and quickly pinpoint areas that need optimization.
-- **Metrics:** Track key application and infrastructure metrics to understand system health and performance trends.
-- **Logging:** Centralize and correlate logs with traces and other telemetry to make debugging easier.
-- **Error tracking:** Detect errors quickly and investigate their root causes with the surrounding context.
-- **SLA monitoring:** Track service-level objectives and identify when your application is approaching or exceeding defined thresholds.
-- **Alarms and alerts:** Set up alerts for critical errors, performance degradation, SLA violations, and other anomalies so your team can react quickly.
+Consultar la sección [Variables de entorno](#️-variables-de-entorno).
 
-To add it to this project, run this and approve the code it prints at [observe.nestjs.com/link](https://observe.nestjs.com/link) - signing up for free if you have no account:
+---
+
+## ⚙️ Variables de entorno
+
+La aplicación utiliza variables de entorno para configurar el servidor y la conexión con la base de datos.
+
+Crear un archivo `.env`:
+
+```env
+PORT=3000
+DATABASE_URL=mysql://root:@localhost:3306/gestor_torneos
+API_BASE_URL=http://localhost:3000
+```
+
+| Variable     | Descripción                              |
+| ------------ | ---------------------------------------- |
+| PORT         | Puerto en el que se ejecuta el servidor. |
+| DATABASE_URL | Dirección de conexión con MySQL.         |
+| API_BASE_URL | URL base de la API.                      |
+
+**Importante:**
+
+- La configuración de ejemplo utiliza el usuario `root` de XAMPP sin contraseña.
+- Si MySQL tiene una contraseña configurada, modificar `DATABASE_URL`.
+- El archivo `.env` está excluido del repositorio mediante `.gitignore`.
+- No publicar credenciales ni información sensible en GitHub.
+
+---
+
+## 💻 Ejecución del proyecto
+
+Para iniciar el servidor en modo desarrollo, ejecutar:
 
 ```bash
-$ npx @nestjs/observe link
+npm run start:dev
 ```
 
-It installs `@nestjs/observe`, wires it into `AppModule` and `main.ts`, and writes the app key and secret into `.env`, which every `nest start` script (`start`, `start:dev`, `start:debug`) then loads. In production, set `OBSERVE_APP_KEY` and `OBSERVE_APP_SECRET` in the environment instead.
+El servidor estará disponible en:
 
-Or do it by hand:
+`http://localhost:3000`
+
+Para generar una compilación:
 
 ```bash
-$ npm install @nestjs/observe
+npm run build
 ```
 
-Then follow the [setup guide](https://docs.nestjs.com/observability/sdk) - it takes a single import and an app key.
+Para ejecutar la versión compilada:
 
-The free plan needs no payment details and covers 300,000 events a month. You can also browse the [live demo](https://www.observe-demo.nestjs.com/dashboard) first - the whole dashboard over a busy service's data, with nothing to install.
+```bash
+npm run start:prod
+```
 
-## Resources
+---
 
-Check out a few resources that may come in handy when working with NestJS:
+## 📁 Estructura del proyecto
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Auto-instrument your application with [NestJS Observe](https://observe.nestjs.com). Distributed tracing, metrics, and logging made easy. Error tracking and performance monitoring for your NestJS applications.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```text
+gestor-torneos-futbol-backend/
+│
+├── src/
+│   ├── main.ts
+│   │
+│   └── modules/
+│       │
+│       ├── app/
+│       │   ├── app.controller.ts
+│       │   ├── app.module.ts
+│       │   └── app.service.ts
+│       │
+│       ├── equipos/
+│       │   ├── dto/
+│       │   ├── entities/
+│       │   │   └── equipo.entity.ts
+│       │   ├── equipos.controller.ts
+│       │   ├── equipos.module.ts
+│       │   └── equipos.service.ts
+│       │
+│       ├── jugadores/
+│       │   ├── dto/
+│       │   ├── entities/
+│       │   │   └── jugadore.entity.ts
+│       │   ├── jugadores.controller.ts
+│       │   ├── jugadores.module.ts
+│       │   └── jugadores.service.ts
+│       │
+│       └── partidos/
+│           ├── dto/
+│           ├── entities/
+│           │   └── partido.entity.ts
+│           ├── partidos.controller.ts
+│           ├── partidos.module.ts
+│           └── partidos.service.ts
+│
+├── .env                  # Configuración local (no subir)
+├── .gitignore
+├── nest-cli.json
+├── package.json
+├── package-lock.json
+├── tsconfig.json
+├── tsconfig.build.json
+└── README.md
+```
 
-## Support
+---
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## 🌿 Organización de Git
 
-## Stay in touch
+El proyecto utiliza Git y GitHub para gestionar los cambios y organizar el desarrollo mediante ramas.
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### Ramas principales
 
-## License
+| Rama                        | Utilización                                       |
+| --------------------------- | ------------------------------------------------- |
+| `main`                      | Versión estable del proyecto.                     |
+| `dev`                       | Integración de las funcionalidades desarrolladas. |
+| `feature/estructura-nestjs` | Creación de la estructura inicial de NestJS.      |
+| `feature/conexion-mysql`    | Conexión con MySQL, entidades y servicios CRUD.   |
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+### Convención de commits
+
+Se utilizan mensajes descriptivos para identificar los cambios realizados.
+
+Ejemplos:
+
+```bash
+git commit -m "feat: agregar modulo de equipos"
+git commit -m "fix: corregir conexion con MySQL"
+git commit -m "refactor: organizar servicios"
+git commit -m "docs: actualizar README"
+```
+
+Las funcionalidades se desarrollan en ramas independientes y posteriormente se integran mediante Pull Requests.
+
+---
+
+## 📌 Estado del proyecto
+
+El proyecto se encuentra en desarrollo.
+
+- [x] Creación del proyecto NestJS.
+- [x] Organización de la estructura modular.
+- [x] Creación de los módulos de equipos, jugadores y partidos.
+- [x] Configuración de variables de entorno.
+- [x] Instalación de TypeORM y MySQL.
+- [x] Creación de la base de datos relacional.
+- [x] Creación de entidades.
+- [x] Configuración de relaciones entre entidades.
+- [x] Conexión del backend con MySQL.
+- [x] Implementación de servicios CRUD.
+- [ ] Validaciones de DTO.
+- [ ] Manejo completo de errores y validaciones de negocio.
+- [ ] Pruebas de endpoints con Postman.
+- [ ] Documentación de la colección de Postman.
+- [ ] Documentación final del proyecto.
+
+---
+
+## 👨‍💻 Autor
+
+\<div align="center">
+
+**Romano Gabriel Nicolas**
+
+Proyecto académico — Gestor de Torneos de Fútbol
+
+Desarrollado con ❤️ utilizando NestJS, TypeScript y MySQL.
+
+[GitHub](https://github.com/romanogabrielnicolas-hue)
+
+\</div>
