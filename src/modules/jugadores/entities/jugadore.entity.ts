@@ -1,3 +1,4 @@
+
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -7,6 +8,7 @@ import {
 } from 'typeorm';
 
 import { Equipo } from '../../equipos/entities/equipo.entity';
+import { Posicion } from '../../posiciones/entities/posicione.entity';
 
 @Entity('jugadores')
 export class Jugador {
@@ -22,8 +24,8 @@ export class Jugador {
   @Column({ type: 'int' })
   edad: number;
 
-  @Column({ type: 'varchar', length: 50 })
-  posicion: string;
+  @Column({ type: 'int' })
+  posicion_id: number;
 
   @Column({ type: 'int' })
   equipo_id: number;
@@ -34,4 +36,8 @@ export class Jugador {
   @ManyToOne(() => Equipo, (equipo) => equipo.jugadores)
   @JoinColumn({ name: 'equipo_id' })
   equipo: Equipo;
+
+  @ManyToOne(() => Posicion)
+  @JoinColumn({ name: 'posicion_id' })
+  posicion: Posicion;
 }
