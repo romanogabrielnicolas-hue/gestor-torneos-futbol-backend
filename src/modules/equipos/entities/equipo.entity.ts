@@ -19,6 +19,12 @@ export class Equipo {
   @Column({ type: 'varchar', length: 50 })
   color: string;
 
+  @Column({ type: 'int' })
+  liga_id: number;
+
+  @Column({ type: 'int' })
+  usuario_id: number;
+
   @OneToMany(() => Jugador, (jugador) => jugador.equipo)
   jugadores: Jugador[];
 }

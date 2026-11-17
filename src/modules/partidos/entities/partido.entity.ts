@@ -20,14 +20,14 @@ export class Partido {
   @Column({ type: 'int' })
   equipo_visitante_id: number;
 
+  @Column({ type: 'int' })
+  cancha_id: number;
+
   @Column({ type: 'date' })
   fecha: string;
 
   @Column({ type: 'time' })
   hora: string;
-
-  @Column({ type: 'varchar', length: 100 })
-  cancha: string;
 
   @ManyToOne(() => Equipo)
   @JoinColumn({ name: 'equipo_local_id' })
