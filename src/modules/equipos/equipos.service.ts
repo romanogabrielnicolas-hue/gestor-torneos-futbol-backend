@@ -1,38 +1,49 @@
 
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-
-import { Equipo } from './entities/equipo.entity';
+import { PrismaService } from '../prisma/prisma.service';
 import { CreateEquipoDto } from './dto/create-equipo.dto';
 import { UpdateEquipoDto } from './dto/update-equipo.dto';
 
 @Injectable()
 export class EquiposService {
-  constructor(
-    @InjectRepository(Equipo)
-    private readonly equiposRepository: Repository<Equipo>,
-  ) {}
+  constructor(private readonly prisma: PrismaService) {}
 
-  create(createEquipoDto: CreateEquipoDto) {
-    const equipo = this.equiposRepository.create(createEquipoDto);
-    return this.equiposRepository.save(equipo);
+  async create(createEquipoDto: CreateEquipoDto) {
+    const { nombre, color, liga_id, usuario_id } = createEquipoDto;
+
+    return this.prisma.equipos.create({
+      data: {
+        nombre,
+        color,
+        liga_usuarios: {
+          connect: {
+            liga_id_usuario_id: {
+              liga_id,
+              usuario_id,
+            },
+          },
+        },
+      },
+      include: {
+        jugadores: true,
+      },
+    });
   }
 
   findAll() {
-    return this.equiposRepository.find({
-      relations: {
-  jugadores: true,
-},
+    return this.prisma.equipos.findMany({
+      include: {
+        jugadores: true,
+      },
     });
   }
 
   async findOne(id: number) {
-    const equipo = await this.equiposRepository.findOne({
+    const equipo = await this.prisma.equipos.findUnique({
       where: { id },
-      relations: {
-  jugadores: true,
-},
+      include: {
+        jugadores: true,
+      },
     });
 
     if (!equipo) {
@@ -43,16 +54,22 @@ export class EquiposService {
   }
 
   async update(id: number, updateEquipoDto: UpdateEquipoDto) {
-    const equipo = await this.findOne(id);
+  await this.findOne(id);
 
-    Object.assign(equipo, updateEquipoDto);
+  await this.prisma.equipos.update({
+    where: { id },
+    data: updateEquipoDto,
+  });
 
-    return this.equiposRepository.save(equipo);
-  }
+  return this.findOne(id);
+}
 
   async remove(id: number) {
-    const equipo = await this.findOne(id);
-    await this.equiposRepository.remove(equipo);
+    await this.findOne(id);
+
+    await this.prisma.equipos.delete({
+      where: { id },
+    });
 
     return { message: 'Equipo eliminado correctamente' };
   }
