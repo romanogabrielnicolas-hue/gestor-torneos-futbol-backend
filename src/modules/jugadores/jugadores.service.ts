@@ -1,60 +1,90 @@
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-
-import { Jugador } from './entities/jugadore.entity';
+import { PrismaService } from '../prisma/prisma.service';
 import { CreateJugadoreDto } from './dto/create-jugadore.dto';
 import { UpdateJugadoreDto } from './dto/update-jugadore.dto';
 
 @Injectable()
 export class JugadoresService {
-  constructor(
-    @InjectRepository(Jugador)
-    private readonly jugadoresRepository: Repository<Jugador>,
-  ) {}
+  constructor(private readonly prisma: PrismaService) {}
 
-  create(createJugadoreDto: CreateJugadoreDto) {
-    const jugador = this.jugadoresRepository.create(createJugadoreDto);
-    return this.jugadoresRepository.save(jugador);
+  async create(createJugadoreDto: CreateJugadoreDto) {
+    await this.validateDni(createJugadoreDto.dni);
+
+    return this.prisma.jugadores.create({
+      data: createJugadoreDto,
+    });
   }
 
   findAll() {
-    return this.jugadoresRepository.find({
-      relations: {
-        equipo: true,
+    return this.prisma.jugadores.findMany({
+      include: {
+        equipos: true,
       },
     });
   }
 
   async findOne(id: number) {
-    const jugador = await this.jugadoresRepository.findOne({
+    const jugador = await this.prisma.jugadores.findUnique({
       where: { id },
-      relations: {
-        equipo: true,
+      include: {
+        equipos: true,
       },
     });
 
     if (!jugador) {
-      throw new NotFoundException(`Jugador con ID ${id} no encontrado`);
+      throw new NotFoundException(
+        `Jugador con ID ${id} no encontrado`,
+      );
     }
 
     return jugador;
   }
 
-  async update(id: number, updateJugadoreDto: UpdateJugadoreDto) {
-    const jugador = await this.findOne(id);
+  async update(
+    id: number,
+    updateJugadoreDto: UpdateJugadoreDto,
+  ) {
+    await this.findOne(id);
 
-    Object.assign(jugador, updateJugadoreDto);
+    if (updateJugadoreDto.dni) {
+      await this.validateDni(updateJugadoreDto.dni, id);
+    }
 
-    return this.jugadoresRepository.save(jugador);
+    await this.prisma.jugadores.update({
+      where: { id },
+      data: updateJugadoreDto,
+    });
+
+    return this.findOne(id);
   }
 
   async remove(id: number) {
-    const jugador = await this.findOne(id);
+    await this.findOne(id);
 
-    await this.jugadoresRepository.remove(jugador);
+    await this.prisma.jugadores.delete({
+      where: { id },
+    });
 
-    return { message: 'Jugador eliminado correctamente' };
+    return {
+      message: 'Jugador eliminado correctamente',
+    };
+  }
+
+  private async validateDni(dni: string, jugadorId?: number) {
+    const existingJugador = await this.prisma.jugadores.findUnique({
+      where: { dni },
+      select: { id: true },
+    });
+
+    if (existingJugador && existingJugador.id !== jugadorId) {
+      throw new ConflictException(
+        'Ya existe un jugador con ese DNI.',
+      );
+    }
   }
 }

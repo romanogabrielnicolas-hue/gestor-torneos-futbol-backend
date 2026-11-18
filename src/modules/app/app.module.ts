@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule } from '@nestjs/config';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
+import { PrismaModule } from '../prisma/prisma.module';
 import { EquiposModule } from '../equipos/equipos.module';
 import { JugadoresModule } from '../jugadores/jugadores.module';
 import { PartidosModule } from '../partidos/partidos.module';
@@ -16,15 +16,7 @@ import { PosicionesModule } from '../posiciones/posiciones.module';
       isGlobal: true,
     }),
 
-    TypeOrmModule.forRootAsync({
-      inject: [ConfigService],
-      useFactory: (configService: ConfigService) => ({
-        type: 'mysql',
-        url: configService.get<string>('DATABASE_URL'),
-        autoLoadEntities: true,
-        synchronize: false,
-      }),
-    }),
+    PrismaModule,
 
     EquiposModule,
     JugadoresModule,

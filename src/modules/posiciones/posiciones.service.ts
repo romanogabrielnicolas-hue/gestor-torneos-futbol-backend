@@ -1,26 +1,90 @@
-import { Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+
+import { PrismaService } from '../prisma/prisma.service';
 import { CreatePosicioneDto } from './dto/create-posicione.dto';
 import { UpdatePosicioneDto } from './dto/update-posicione.dto';
 
 @Injectable()
 export class PosicionesService {
-  create(createPosicioneDto: CreatePosicioneDto) {
-    return 'This action adds a new posicione';
+  constructor(private readonly prisma: PrismaService) {}
+
+  async create(createPosicioneDto: CreatePosicioneDto) {
+    await this.validateNombre(createPosicioneDto.nombre);
+
+    return this.prisma.posiciones.create({
+      data: createPosicioneDto,
+    });
   }
 
   findAll() {
-    return `This action returns all posiciones`;
+    return this.prisma.posiciones.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} posicione`;
+  async findOne(id: number) {
+    const posicion = await this.prisma.posiciones.findUnique({
+      where: { id },
+    });
+
+    if (!posicion) {
+      throw new NotFoundException(
+        `Posición con ID ${id} no encontrada`,
+      );
+    }
+
+    return posicion;
   }
 
-  update(id: number, updatePosicioneDto: UpdatePosicioneDto) {
-    return `This action updates a #${id} posicione`;
+  async update(
+    id: number,
+    updatePosicioneDto: UpdatePosicioneDto,
+  ) {
+    await this.findOne(id);
+
+    if (updatePosicioneDto.nombre) {
+      await this.validateNombre(updatePosicioneDto.nombre, id);
+    }
+
+    await this.prisma.posiciones.update({
+      where: { id },
+      data: updatePosicioneDto,
+    });
+
+    return this.findOne(id);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} posicione`;
+  async remove(id: number) {
+    await this.findOne(id);
+
+    await this.prisma.posiciones.delete({
+      where: { id },
+    });
+
+    return {
+      message: 'Posición eliminada correctamente',
+    };
+  }
+
+  private async validateNombre(
+    nombre: string,
+    posicionId?: number,
+  ) {
+    const existingPosicion =
+      await this.prisma.posiciones.findUnique({
+        where: { nombre },
+        select: { id: true },
+      });
+
+    if (
+      existingPosicion &&
+      existingPosicion.id !== posicionId
+    ) {
+      throw new ConflictException(
+        'Ya existe una posición con ese nombre.',
+      );
+    }
   }
 }
