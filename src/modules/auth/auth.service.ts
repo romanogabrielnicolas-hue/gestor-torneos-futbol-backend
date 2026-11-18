@@ -1,26 +1,82 @@
-import { Injectable } from '@nestjs/common';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import {
+  ConflictException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import * as bcrypt from 'bcrypt';
+
+import { PrismaService } from '../prisma/prisma.service';
+import { RegisterDto } from './dto/register.dto';
+import { LoginDto } from './dto/login.dto';
 
 @Injectable()
 export class AuthService {
-  create(createAuthDto: CreateAuthDto) {
-    return 'This action adds a new auth';
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly jwtService: JwtService,
+  ) {}
+
+  async register(registerDto: RegisterDto) {
+    const passwordHash = await bcrypt.hash(registerDto.password, 10);
+
+    try {
+      const user = await this.prisma.usuarios.create({
+        data: {
+          nombre: registerDto.nombre,
+          email: registerDto.email,
+          password: passwordHash,
+        },
+        select: {
+          id: true,
+          nombre: true,
+          email: true,
+          created_at: true,
+        },
+      });
+
+      return user;
+    } catch (error) {
+      if (
+        typeof error === 'object' &&
+        error !== null &&
+        'code' in error &&
+        error.code === 'P2002'
+      ) {
+        throw new ConflictException('Ya existe un usuario con ese email');
+      }
+
+      throw error;
+    }
   }
 
-  findAll() {
-    return `This action returns all auth`;
-  }
+  async login(loginDto: LoginDto) {
+    const user = await this.prisma.usuarios.findUnique({
+      where: {
+        email: loginDto.email,
+      },
+    });
 
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
-  }
+    if (
+      !user ||
+      !(await bcrypt.compare(loginDto.password, user.password))
+    ) {
+      throw new UnauthorizedException('Email o contraseña incorrectos');
+    }
 
-  update(id: number, updateAuthDto: UpdateAuthDto) {
-    return `This action updates a #${id} auth`;
-  }
+    const accessToken = await this.jwtService.signAsync({
+      sub: user.id,
+      email: user.email,
+    });
 
-  remove(id: number) {
-    return `This action removes a #${id} auth`;
+    return {
+      access_token: accessToken,
+      user: {
+        id: user.id,
+        nombre: user.nombre,
+        email: user.email,
+        created_at: user.created_at,
+      },
+    };
   }
 }
