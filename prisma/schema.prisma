@@ -1,0 +1,104 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model canchas {
+  id        Int        @id @default(autoincrement())
+  nombre    String     @unique(map: "uq_canchas_nombre") @db.VarChar(100)
+  direccion String     @db.VarChar(150)
+  partidos  partidos[]
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model equipos {
+  id                                             Int           @id @default(autoincrement())
+  nombre                                         String        @db.VarChar(100)
+  color                                          String        @db.VarChar(50)
+  liga_id                                        Int
+  usuario_id                                     Int
+  liga_usuarios                                  liga_usuarios @relation(fields: [liga_id, usuario_id], references: [liga_id, usuario_id], map: "fk_equipos_membresia")
+  jugadores                                      jugadores[]
+  partidos_partidos_equipo_local_idToequipos     partidos[]    @relation("partidos_equipo_local_idToequipos")
+  partidos_partidos_equipo_visitante_idToequipos partidos[]    @relation("partidos_equipo_visitante_idToequipos")
+
+  @@unique([liga_id, nombre], map: "uq_equipos_liga_nombre")
+  @@index([liga_id, usuario_id], map: "fk_equipos_membresia")
+}
+
+model jugadores {
+  id          Int        @id @default(autoincrement())
+  nombre      String     @db.VarChar(100)
+  dni         String     @unique(map: "uq_jugadores_dni") @db.VarChar(20)
+  edad        Int
+  numero      Int
+  posicion_id Int
+  equipo_id   Int
+  equipos     equipos    @relation(fields: [equipo_id], references: [id], map: "fk_jugadores_equipo")
+  posiciones  posiciones @relation(fields: [posicion_id], references: [id], map: "fk_jugadores_posicion")
+
+  @@unique([equipo_id, numero], map: "uq_jugadores_equipo_numero")
+  @@index([posicion_id], map: "fk_jugadores_posicion")
+}
+
+model liga_usuarios {
+  liga_id       Int
+  usuario_id    Int
+  fecha_ingreso DateTime  @default(now()) @db.Timestamp(0)
+  equipos       equipos[]
+  ligas         ligas     @relation(fields: [liga_id], references: [id], onDelete: Cascade, map: "fk_liga_usuarios_liga")
+  usuarios      usuarios  @relation(fields: [usuario_id], references: [id], onDelete: Cascade, map: "fk_liga_usuarios_usuario")
+
+  @@id([liga_id, usuario_id])
+  @@index([usuario_id], map: "fk_liga_usuarios_usuario")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model ligas {
+  id            Int             @id @default(autoincrement())
+  nombre        String          @unique(map: "uq_ligas_nombre") @db.VarChar(100)
+  creador_id    Int
+  created_at    DateTime        @default(now()) @db.Timestamp(0)
+  liga_usuarios liga_usuarios[]
+  usuarios      usuarios        @relation(fields: [creador_id], references: [id], map: "fk_ligas_creador")
+
+  @@index([creador_id], map: "fk_ligas_creador")
+}
+
+model partidos {
+  id                                            Int      @id @default(autoincrement())
+  equipo_local_id                               Int
+  equipo_visitante_id                           Int
+  cancha_id                                     Int
+  fecha                                         DateTime @db.Date
+  hora                                          DateTime @db.Time(0)
+  canchas                                       canchas  @relation(fields: [cancha_id], references: [id], map: "fk_partidos_cancha")
+  equipos_partidos_equipo_local_idToequipos     equipos  @relation("partidos_equipo_local_idToequipos", fields: [equipo_local_id], references: [id], onUpdate: Restrict, map: "fk_partidos_local")
+  equipos_partidos_equipo_visitante_idToequipos equipos  @relation("partidos_equipo_visitante_idToequipos", fields: [equipo_visitante_id], references: [id], onUpdate: Restrict, map: "fk_partidos_visitante")
+
+  @@unique([cancha_id, fecha, hora], map: "uq_partidos_cancha_fecha_hora")
+  @@index([equipo_local_id], map: "fk_partidos_local")
+  @@index([equipo_visitante_id], map: "fk_partidos_visitante")
+}
+
+model posiciones {
+  id        Int         @id @default(autoincrement())
+  nombre    String      @unique(map: "uq_posiciones_nombre") @db.VarChar(50)
+  jugadores jugadores[]
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model usuarios {
+  id            Int             @id @default(autoincrement())
+  nombre        String          @db.VarChar(100)
+  email         String          @unique(map: "uq_usuarios_email") @db.VarChar(150)
+  password      String          @db.VarChar(255)
+  created_at    DateTime        @default(now()) @db.Timestamp(0)
+  liga_usuarios liga_usuarios[]
+  ligas         ligas[]
+}
