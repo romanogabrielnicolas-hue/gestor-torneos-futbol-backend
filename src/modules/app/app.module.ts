@@ -9,6 +9,7 @@ import { EquiposModule } from '../equipos/equipos.module';
 import { JugadoresModule } from '../jugadores/jugadores.module';
 import { PartidosModule } from '../partidos/partidos.module';
 import { PosicionesModule } from '../posiciones/posiciones.module';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { PosicionesModule } from '../posiciones/posiciones.module';
     JugadoresModule,
     PartidosModule,
     PosicionesModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
