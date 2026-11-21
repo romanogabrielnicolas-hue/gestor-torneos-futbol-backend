@@ -1,402 +1,356 @@
 # ⚽ Gestor de Torneos de Fútbol
 
-### Backend REST API — NestJS + TypeScript + MySQL
+### Backend REST API — NestJS + TypeScript + Prisma + MySQL
 
-API REST para la gestión de equipos, jugadores, posiciones y partidos de un torneo de fútbol. Desarrollada con NestJS, TypeScript y TypeORM, utilizando MySQL como sistema de gestión de base de datos.
+API REST desarrollada para la gestión de torneos de fútbol. Permite administrar equipos, jugadores, posiciones y partidos, además de contar con funcionalidades de registro e inicio de sesión de usuarios.
+
+El proyecto utiliza **NestJS** como framework backend, **Prisma ORM** para interactuar con la base de datos MySQL y **JWT** para la autenticación.
 
 ---
 
 ## 📋 Tabla de contenido
 
-- [⚽ Descripción del proyecto](#-descripción-del-proyecto)
-- [✨ Características](#-características)
-- [🧩 Arquitectura y módulos](#-arquitectura-y-módulos)
-- [🛠️ Tecnologías utilizadas](#️-tecnologías-utilizadas)
-- [🗄️ Base de datos](#️-base-de-datos)
-- [🔗 Relaciones entre tablas](#-relaciones-entre-tablas)
-- [🌐 Endpoints de la API](#-endpoints-de-la-api)
-- [🚀 Instalación](#-instalación)
-- [⚙️ Variables de entorno](#️-variables-de-entorno)
-- [💻 Ejecución del proyecto](#-ejecución-del-proyecto)
-- [🧪 Pruebas con Postman](#-pruebas-con-postman)
-- [📁 Estructura del proyecto](#-estructura-del-proyecto)
-- [🌿 Organización de Git](#-organización-de-git)
-- [📌 Estado del proyecto](#-estado-del-proyecto)
-- [👨‍💻 Autor](#-autor)
+- [Descripción del proyecto](#-descripción-del-proyecto)
+- [Características](#-características)
+- [Tecnologías utilizadas](#️-tecnologías-utilizadas)
+- [Arquitectura](#-arquitectura)
+- [Módulos](#-módulos)
+- [Base de datos](#️-base-de-datos)
+- [Endpoints](#-endpoints)
+- [Validaciones](#-validaciones)
+- [Autenticación](#-autenticación)
+- [Instalación](#-instalación)
+- [Variables de entorno](#️-variables-de-entorno)
+- [Ejecución](#-ejecución)
+- [Pruebas con Postman](#-pruebas-con-postman)
+- [Estructura del proyecto](#-estructura-del-proyecto)
+- [Organización de Git](#-organización-de-git)
+- [Estado del proyecto](#-estado-del-proyecto)
+- [Autor](#-autor)
 
 ---
 
 ## ⚽ Descripción del proyecto
 
-**Gestor de Torneos de Fútbol** es un proyecto backend desarrollado para administrar la información de un torneo de fútbol mediante una API REST.
+**Gestor de Torneos de Fútbol** es un proyecto backend que permite administrar los datos necesarios para la organización de un torneo de fútbol mediante una API REST.
 
-El sistema está organizado en módulos independientes, siguiendo la arquitectura modular de NestJS. Cada módulo separa sus responsabilidades mediante controladores, servicios, entidades y DTO.
+El sistema está desarrollado utilizando una arquitectura modular de NestJS, separando las responsabilidades de controladores, servicios, DTO y módulos.
 
-La aplicación utiliza **MySQL** para almacenar la información y **TypeORM** para gestionar la comunicación entre el backend y la base de datos.
+La persistencia de datos se realiza mediante **Prisma ORM**, conectado a una base de datos relacional **MySQL**.
 
-El proyecto contempla los siguientes recursos:
+El sistema permite administrar:
 
-- ⚽ Equipos.
-- 👤 Jugadores.
-- 📍 Posiciones.
-- 📅 Partidos.
-- 🔐 Autenticación (estructura inicial).
-- 👥 Usuarios (estructura inicial).
+- Equipos.
+- Jugadores.
+- Posiciones.
+- Partidos.
+- Usuarios mediante registro e inicio de sesión.
+
+---
 
 ## ✨ Características
 
 ### ⚽ Gestión de equipos
 
-- Registrar nuevos equipos.
+- Registrar equipos.
 - Consultar todos los equipos.
-- Consultar un equipo por su identificador.
-- Actualizar información de un equipo.
+- Consultar un equipo por ID.
+- Modificar información de un equipo.
 - Eliminar equipos.
-- Consultar los jugadores asociados a cada equipo.
-- Registrar el identificador de liga y usuario asociado.
+- Asociar equipos con ligas y usuarios.
 
 ### 👤 Gestión de jugadores
 
 - Registrar jugadores.
-- Almacenar nombre, DNI y edad.
-- Asignar una posición a cada jugador.
-- Asignar un jugador a un equipo.
-- Registrar el número de camiseta.
-- Consultar jugadores.
-- Consultar un jugador por su identificador.
-- Actualizar y eliminar jugadores.
-- Consultar la información relacionada con su equipo.
+- Consultar todos los jugadores.
+- Consultar un jugador por ID.
+- Modificar información de jugadores.
+- Eliminar jugadores.
+- Asociar jugadores a equipos.
+- Asignar posiciones.
+- Registrar DNI, edad y número de camiseta.
 
 ### 📍 Gestión de posiciones
 
-Se incorpora la estructura del módulo de posiciones para administrar las posiciones de los jugadores.
-
-- Definición de la entidad Posición.
-- Identificador autoincremental.
-- Nombre de la posición.
-- Controlador y servicio inicial.
-- Rutas CRUD estructuradas.
-
-**Nota:** la lógica de persistencia del módulo todavía se encuentra pendiente de implementación.
+- Registrar posiciones.
+- Consultar todas las posiciones.
+- Consultar una posición por ID.
+- Modificar posiciones.
+- Eliminar posiciones.
 
 ### 📅 Gestión de partidos
 
-- Registrar partidos entre dos equipos.
-- Establecer equipo local y visitante.
-- Guardar fecha y hora del encuentro.
-- Registrar el identificador de la cancha.
+- Registrar partidos.
 - Consultar todos los partidos.
-- Consultar un partido por su identificador.
-- Actualizar y eliminar partidos.
-- Consultar información de los equipos participantes.
+- Consultar un partido por ID.
+- Modificar partidos.
+- Eliminar partidos.
+- Asociar equipos local y visitante.
+- Registrar cancha, fecha y hora del encuentro.
 
-### 🔐 Autenticación y usuarios
+### 🔐 Autenticación
 
-Se incorporan las estructuras iniciales de los módulos:
-
-- **Auth:** destinado a gestionar los procesos de autenticación.
-- **Users:** destinado a administrar los usuarios del sistema.
-
-Ambos módulos cuentan con controladores, servicios, DTO y entidades iniciales.
-
-**Nota:** estos módulos todavía no tienen implementada su lógica funcional ni están registrados en el módulo principal de la aplicación.
-
-### 🛡️ Validaciones e integridad de datos
-
-- Validación de los datos recibidos mediante DTO.
-- Validación de tipos de datos.
-- Restricción de campos obligatorios.
-- Validación de longitudes máximas.
-- Validación del formato del DNI.
-- Validación de edad y número de camiseta.
-- Validación de fechas y horarios.
-- Restricciones de unicidad para el DNI.
-- Relaciones entre entidades mediante claves foráneas.
-
----
-
-## 🧩 Arquitectura y módulos
-
-El backend utiliza una arquitectura modular basada en NestJS.
-
-Cada módulo separa las responsabilidades de la aplicación:
-
-| Componente | Responsabilidad                                       |
-| ---------- | ----------------------------------------------------- |
-| Controller | Recibe las solicitudes HTTP y devuelve respuestas.    |
-| Service    | Contiene la lógica de negocio y operaciones CRUD.     |
-| Entity     | Representa las tablas de la base de datos.            |
-| DTO        | Define y valida la estructura de los datos recibidos. |
-| Module     | Agrupa e integra los componentes de cada recurso.     |
-
-### Módulo de equipos
-
-`EquiposModule`
-
-Se encarga de gestionar los equipos y su relación con los jugadores.
-
-### Módulo de jugadores
-
-`JugadoresModule`
-
-Administra los jugadores y las relaciones con los equipos y las posiciones.
-
-### Módulo de partidos
-
-`PartidosModule`
-
-Gestiona los encuentros y las relaciones con los equipos local y visitante.
-
-### Módulo de posiciones
-
-`PosicionesModule`
-
-Contiene la estructura para administrar las posiciones de los jugadores. Se encuentra registrado en el módulo principal.
-
-### Módulo de autenticación
-
-`AuthModule`
-
-Contiene la estructura inicial destinada a implementar los procesos de autenticación. Pendiente de integración y desarrollo funcional.
-
-### Módulo de usuarios
-
-`UsersModule`
-
-Contiene la estructura inicial para administrar usuarios. Pendiente de integración y desarrollo funcional.
-
-### Módulo principal
-
-`AppModule`
-
-Es el módulo principal de la aplicación. Integra los módulos de equipos, jugadores, partidos y posiciones, además de configurar las variables de entorno y la conexión con MySQL mediante TypeORM.
+- Registro de usuarios.
+- Inicio de sesión.
+- Validación de credenciales.
+- Encriptación de contraseñas mediante bcrypt.
+- Generación de tokens JWT.
 
 ---
 
 ## 🛠️ Tecnologías utilizadas
 
-| Tecnología        | Utilización                                |
-| ----------------- | ------------------------------------------ |
-| NestJS            | Framework para desarrollar el backend.     |
-| TypeScript        | Lenguaje de programación.                  |
-| Node.js           | Entorno de ejecución.                      |
-| MySQL             | Sistema de gestión de base de datos.       |
-| XAMPP             | Entorno local para ejecutar MySQL.         |
-| phpMyAdmin        | Administración visual de la base de datos. |
-| TypeORM           | Mapeo objeto-relacional (ORM).             |
-| mysql2            | Driver de conexión con MySQL.              |
-| @nestjs/config    | Gestión de variables de entorno.           |
-| class-validator   | Validación de datos mediante DTO.          |
-| class-transformer | Transformación de datos recibidos.         |
-| Git               | Control de versiones.                      |
-| GitHub            | Alojamiento del repositorio.               |
-| Postman           | Prueba y documentación de endpoints.       |
+| Tecnología        | Utilización                               |
+| ----------------- | ----------------------------------------- |
+| NestJS            | Framework para desarrollar el backend     |
+| TypeScript        | Lenguaje de programación                  |
+| Node.js           | Entorno de ejecución                      |
+| Prisma ORM        | Acceso y gestión de la base de datos      |
+| MySQL             | Sistema de gestión de base de datos       |
+| XAMPP             | Entorno local para ejecutar MySQL         |
+| phpMyAdmin        | Administración visual de la base de datos |
+| @nestjs/config    | Gestión de variables de entorno           |
+| class-validator   | Validación de datos                       |
+| class-transformer | Transformación de datos                   |
+| bcrypt            | Encriptación de contraseñas               |
+| JWT               | Autenticación mediante tokens             |
+| Git               | Control de versiones                      |
+| GitHub            | Alojamiento del repositorio               |
+| Postman           | Pruebas de endpoints                      |
+
+---
+
+## 🧩 Arquitectura
+
+El backend utiliza una arquitectura modular proporcionada por NestJS.
+
+Cada módulo organiza sus componentes y separa las responsabilidades de la aplicación.
+
+| Componente    | Responsabilidad                                                  |
+| ------------- | ---------------------------------------------------------------- |
+| Controller    | Recibe solicitudes HTTP y define las rutas                       |
+| Service       | Contiene la lógica de negocio y operaciones                      |
+| DTO           | Define y valida los datos recibidos                              |
+| Module        | Agrupa e integra los componentes                                 |
+| PrismaService | Gestiona la conexión y acceso a la base de datos mediante Prisma |
+
+El flujo general de una solicitud es:
+
+```text
+Cliente (Postman)
+       │
+       ▼
+   Controller
+       │
+       ▼
+     DTO
+       │
+       ▼
+    Service
+       │
+       ▼
+  PrismaService
+       │
+       ▼
+     MySQL
+```
+
+---
+
+## 📦 Módulos
+
+### AppModule
+
+Es el módulo principal de la aplicación.
+
+Se encarga de integrar los módulos y configurar los componentes principales del backend.
+
+### EquiposModule
+
+Gestiona las operaciones CRUD de los equipos.
+
+### JugadoresModule
+
+Gestiona los jugadores y sus relaciones con equipos y posiciones.
+
+### PartidosModule
+
+Gestiona los encuentros entre equipos.
+
+### PosicionesModule
+
+Gestiona las posiciones de los jugadores.
+
+### AuthModule
+
+Gestiona el registro y el inicio de sesión de usuarios.
 
 ---
 
 ## 🗄️ Base de datos
 
-El proyecto utiliza una base de datos relacional llamada:
-
-`gestor_torneos`
-
-La conexión se realiza mediante TypeORM y el driver mysql2.
-
-### Tabla: equipos
-
-Almacena la información de los equipos participantes.
-
-| Campo      | Tipo         | Descripción                         |
-| ---------- | ------------ | ----------------------------------- |
-| id         | INT          | Identificador principal.            |
-| nombre     | VARCHAR(100) | Nombre del equipo.                  |
-| color      | VARCHAR(50)  | Color del equipo.                   |
-| liga_id    | INT          | Identificador de la liga.           |
-| usuario_id | INT          | Identificador del usuario asociado. |
-
-### Tabla: jugadores
-
-Almacena los datos de los jugadores y sus relaciones correspondientes.
-
-| Campo       | Tipo         | Descripción                   |
-| ----------- | ------------ | ----------------------------- |
-| id          | INT          | Identificador principal.      |
-| nombre      | VARCHAR(100) | Nombre del jugador.           |
-| dni         | VARCHAR(20)  | Documento de identidad único. |
-| edad        | INT          | Edad del jugador.             |
-| posicion_id | INT          | Referencia a la posición.     |
-| equipo_id   | INT          | Referencia al equipo.         |
-| numero      | INT          | Número de camiseta.           |
-
-### Tabla: posiciones
-
-Almacena las posiciones disponibles para los jugadores.
-
-| Campo  | Tipo        | Descripción              |
-| ------ | ----------- | ------------------------ |
-| id     | INT         | Identificador principal. |
-| nombre | VARCHAR(50) | Nombre de la posición.   |
-
-### Tabla: partidos
-
-Almacena los encuentros programados entre los equipos.
-
-| Campo               | Tipo | Descripción                         |
-| ------------------- | ---- | ----------------------------------- |
-| id                  | INT  | Identificador principal.            |
-| equipo_local_id     | INT  | Identificador del equipo local.     |
-| equipo_visitante_id | INT  | Identificador del equipo visitante. |
-| cancha_id           | INT  | Identificador de la cancha.         |
-| fecha               | DATE | Fecha del encuentro.                |
-| hora                | TIME | Hora del encuentro.                 |
-
-**Importante:** la configuración de TypeORM utiliza `synchronize: false`. Por lo tanto, las tablas deben estar creadas previamente en MySQL y respetar la estructura de las entidades.
-
----
-
-## 🔗 Relaciones entre tablas
-
-La base de datos utiliza relaciones para mantener la integridad de la información.
-
-### Equipos y jugadores
-
-Un equipo puede tener muchos jugadores, pero cada jugador pertenece a un único equipo.
-
-**Relación: uno a muchos (1:N).**
-
-### Posiciones y jugadores
-
-Una posición puede estar asignada a varios jugadores, pero cada jugador tiene una posición asociada.
-
-**Relación: uno a muchos (1:N).**
-
-### Equipos y partidos
-
-Cada partido tiene dos referencias a la tabla equipos:
-
-- Equipo local.
-- Equipo visitante.
-
-Un equipo puede participar en distintos partidos, tanto como local como visitante.
-
-**Relación: uno a muchos (1:N) desde cada referencia de equipo.**
-
-### Diagrama conceptual
+El proyecto utiliza una base de datos relacional MySQL denominada:
 
 ```text
-          ┌──────────────────┐
-          │      EQUIPOS     │
-          ├──────────────────┤
-          │ id (PK)          │
-          │ nombre           │
-          │ color            │
-          │ liga_id          │
-          │ usuario_id       │
-          └────────┬─────────┘
-                   │
-                1  │  N
-                   │
-          ┌────────▼─────────┐
-          │    JUGADORES     │
-          ├──────────────────┤
-          │ id (PK)          │
-          │ nombre           │
-          │ dni              │
-          │ edad             │
-          │ posicion_id (FK) │
-          │ equipo_id (FK)   │
-          │ numero           │
-          └────────┬─────────┘
-                   │
-                N  │  1
-                   │
-          ┌────────▼─────────┐
-          │    POSICIONES    │
-          ├──────────────────┤
-          │ id (PK)          │
-          │ nombre           │
-          └──────────────────┘
-
-
-          ┌──────────────────┐
-          │      EQUIPOS     │
-          │    (equipo 1)    │
-          └────────┬─────────┘
-                   │ equipo_local_id
-                   │
-          ┌────────▼─────────┐
-          │     PARTIDOS     │
-          ├──────────────────┤
-          │ id (PK)          │
-          │ equipo_local_id  │
-          │ equipo_visitante_id
-          │ cancha_id        │
-          │ fecha            │
-          │ hora             │
-          └────────▲─────────┘
-                   │ equipo_visitante_id
-                   │
-          ┌────────┴─────────┐
-          │      EQUIPOS     │
-          │    (equipo 2)    │
-          └──────────────────┘
+gestor_torneos
 ```
+
+La comunicación entre NestJS y MySQL se realiza mediante Prisma ORM.
+
+Prisma permite consultar, crear, modificar y eliminar registros de la base de datos mediante Prisma Client.
+
+La estructura de la base de datos se encuentra definida e introspectada en:
+
+```text
+prisma/schema.prisma
+```
+
+### Modelos principales
+
+- Equipos
+- Jugadores
+- Posiciones
+- Partidos
+- Usuarios
+- Ligas
+- Liga_Usuarios
+- Canchas
+
+### Relaciones
+
+El sistema utiliza relaciones entre las tablas para mantener la integridad de los datos.
+
+Entre las principales relaciones se encuentran:
+
+- Un equipo puede tener varios jugadores.
+- Un jugador pertenece a un equipo.
+- Una posición puede estar asignada a varios jugadores.
+- Un jugador tiene una posición asociada.
+- Un partido tiene un equipo local y un equipo visitante.
+- Los equipos pueden participar en varios partidos.
 
 ---
 
-## 🌐 Endpoints de la API
+## 🌐 Endpoints
 
-La API utiliza los métodos HTTP para realizar las operaciones CRUD (Crear, Leer, Actualizar y Eliminar).
+La API utiliza los métodos HTTP para realizar operaciones CRUD.
 
-**URL local de la API:**
+### URL base
 
-`http://localhost:3000`
+```text
+http://localhost:4000
+```
 
 ### ⚽ Equipos
 
-| Método | Endpoint       | Descripción                |
-| ------ | -------------- | -------------------------- |
-| GET    | `/equipos`     | Obtener todos los equipos. |
-| GET    | `/equipos/:id` | Obtener un equipo por ID.  |
-| POST   | `/equipos`     | Registrar un equipo.       |
-| PATCH  | `/equipos/:id` | Actualizar un equipo.      |
-| DELETE | `/equipos/:id` | Eliminar un equipo.        |
+| Método | Endpoint       | Descripción               |
+| ------ | -------------- | ------------------------- |
+| GET    | `/equipos`     | Obtener todos los equipos |
+| GET    | `/equipos/:id` | Obtener un equipo por ID  |
+| POST   | `/equipos`     | Registrar un equipo       |
+| PATCH  | `/equipos/:id` | Actualizar un equipo      |
+| DELETE | `/equipos/:id` | Eliminar un equipo        |
 
 ### 👤 Jugadores
 
-| Método | Endpoint         | Descripción                  |
-| ------ | ---------------- | ---------------------------- |
-| GET    | `/jugadores`     | Obtener todos los jugadores. |
-| GET    | `/jugadores/:id` | Obtener un jugador por ID.   |
-| POST   | `/jugadores`     | Registrar un jugador.        |
-| PATCH  | `/jugadores/:id` | Actualizar un jugador.       |
-| DELETE | `/jugadores/:id` | Eliminar un jugador.         |
+| Método | Endpoint         | Descripción                 |
+| ------ | ---------------- | --------------------------- |
+| GET    | `/jugadores`     | Obtener todos los jugadores |
+| GET    | `/jugadores/:id` | Obtener un jugador por ID   |
+| POST   | `/jugadores`     | Registrar un jugador        |
+| PATCH  | `/jugadores/:id` | Actualizar un jugador       |
+| DELETE | `/jugadores/:id` | Eliminar un jugador         |
 
 ### 📍 Posiciones
 
-Las rutas están creadas, pero la lógica de persistencia del servicio está pendiente.
-
-| Método | Endpoint          | Descripción                    |
-| ------ | ----------------- | ------------------------------ |
-| GET    | `/posiciones`     | Consultar posiciones.          |
-| GET    | `/posiciones/:id` | Consultar una posición por ID. |
-| POST   | `/posiciones`     | Registrar una posición.        |
-| PATCH  | `/posiciones/:id` | Actualizar una posición.       |
-| DELETE | `/posiciones/:id` | Eliminar una posición.         |
+| Método | Endpoint          | Descripción                  |
+| ------ | ----------------- | ---------------------------- |
+| GET    | `/posiciones`     | Obtener todas las posiciones |
+| GET    | `/posiciones/:id` | Obtener una posición por ID  |
+| POST   | `/posiciones`     | Registrar una posición       |
+| PATCH  | `/posiciones/:id` | Actualizar una posición      |
+| DELETE | `/posiciones/:id` | Eliminar una posición        |
 
 ### 📅 Partidos
 
-| Método | Endpoint        | Descripción                 |
-| ------ | --------------- | --------------------------- |
-| GET    | `/partidos`     | Obtener todos los partidos. |
-| GET    | `/partidos/:id` | Obtener un partido por ID.  |
-| POST   | `/partidos`     | Registrar un partido.       |
-| PATCH  | `/partidos/:id` | Actualizar un partido.      |
-| DELETE | `/partidos/:id` | Eliminar un partido.        |
+| Método | Endpoint        | Descripción                |
+| ------ | --------------- | -------------------------- |
+| GET    | `/partidos`     | Obtener todos los partidos |
+| GET    | `/partidos/:id` | Obtener un partido por ID  |
+| POST   | `/partidos`     | Registrar un partido       |
+| PATCH  | `/partidos/:id` | Actualizar un partido      |
+| DELETE | `/partidos/:id` | Eliminar un partido        |
 
-### 🔐 Autenticación y usuarios
+### 🔐 Autenticación
 
-Los módulos `Auth` y `Users` cuentan con controladores y rutas iniciales en el código, pero todavía no están registrados en `AppModule`. Por lo tanto, sus endpoints no están disponibles actualmente en la API.
+| Método | Endpoint         | Descripción          |
+| ------ | ---------------- | -------------------- |
+| POST   | `/auth/register` | Registrar un usuario |
+| POST   | `/auth/login`    | Iniciar sesión       |
+
+---
+
+## 🛡️ Validaciones
+
+El proyecto utiliza DTO y las librerías `class-validator` y `class-transformer` para validar y transformar los datos recibidos.
+
+Además, se encuentra configurado un `ValidationPipe` global.
+
+Las validaciones permiten controlar:
+
+- Campos obligatorios.
+- Tipos de datos.
+- Formatos de datos.
+- Longitudes de campos.
+- Datos incorrectos enviados desde las solicitudes HTTP.
+- Propiedades no permitidas.
+
+La configuración global permite aplicar validaciones a las solicitudes entrantes antes de que lleguen a los servicios.
+
+---
+
+## 🔐 Autenticación
+
+El sistema implementa registro e inicio de sesión.
+
+### Registro
+
+Endpoint:
+
+```http
+POST /auth/register
+```
+
+Ejemplo de solicitud:
+
+```json
+{
+  "nombre": "Usuario Prueba",
+  "email": "prueba@example.com",
+  "password": "Prueba123"
+}
+```
+
+### Inicio de sesión
+
+Endpoint:
+
+```http
+POST /auth/login
+```
+
+Ejemplo:
+
+```json
+{
+  "email": "prueba@example.com",
+  "password": "Prueba123"
+}
+```
+
+El sistema valida las credenciales y utiliza bcrypt para proteger las contraseñas almacenadas.
+
+Cuando el inicio de sesión es exitoso, se genera un token JWT.
 
 ---
 
@@ -404,7 +358,7 @@ Los módulos `Auth` y `Users` cuentan con controladores y rutas iniciales en el 
 
 ### Requisitos previos
 
-Antes de ejecutar el proyecto, es necesario tener instalado:
+Antes de ejecutar el proyecto es necesario tener instalado:
 
 - [Node.js](https://nodejs.org/)
 - [Git](https://git-scm.com/)
@@ -429,56 +383,57 @@ cd gestor-torneos-futbol-backend
 npm install
 ```
 
-### 4. Crear la base de datos
+### 4. Configurar MySQL
 
 1. Abrir XAMPP.
 2. Iniciar el servicio MySQL.
-3. Ingresar a phpMyAdmin.
-4. Crear la base de datos `gestor_torneos`.
-5. Crear las tablas correspondientes a las entidades del proyecto.
-6. Configurar las claves primarias, relaciones y restricciones necesarias.
+3. Abrir phpMyAdmin.
+4. Crear o verificar la base de datos `gestor_torneos`.
+5. Comprobar que las tablas y relaciones se encuentren correctamente configuradas.
 
-**Nota:** TypeORM tiene desactivada la sincronización automática de esquemas. La creación y modificación de tablas debe realizarse manualmente o mediante migraciones.
-
-### 5. Configurar las variables de entorno
+### 5. Configurar variables de entorno
 
 Crear un archivo `.env` en la raíz del proyecto.
 
-Consultar la sección [Variables de entorno](#️-variables-de-entorno).
+Ver la sección [Variables de entorno](#️-variables-de-entorno).
+
+### 6. Generar Prisma Client
+
+```bash
+npx prisma generate
+```
 
 ---
 
 ## ⚙️ Variables de entorno
 
-La aplicación utiliza variables de entorno para configurar el servidor y la conexión con la base de datos.
+Crear un archivo `.env` en la raíz del proyecto.
 
-Crear un archivo `.env`:
+Ejemplo:
 
 ```env
-PORT=3000
+PORT=4000
 
 DATABASE_URL=mysql://root:@localhost:3306/gestor_torneos
+
+JWT_SECRET=una_clave_secreta_para_desarrollo
 ```
 
-### Descripción de variables
+### Descripción
 
-| Variable     | Descripción                              |
-| ------------ | ---------------------------------------- |
-| PORT         | Puerto en el que se ejecuta el servidor. |
-| DATABASE_URL | Dirección de conexión con MySQL.         |
+| Variable     | Descripción                            |
+| ------------ | -------------------------------------- |
+| PORT         | Puerto donde se ejecuta el servidor    |
+| DATABASE_URL | URL de conexión a MySQL                |
+| JWT_SECRET   | Clave utilizada para firmar tokens JWT |
 
-**Importante:**
-
-- La configuración de ejemplo utiliza el usuario `root` de XAMPP sin contraseña.
-- Si MySQL tiene una contraseña configurada, modificar `DATABASE_URL`.
-- El archivo `.env` está excluido del repositorio mediante `.gitignore`.
-- No publicar credenciales ni información sensible en GitHub.
+> **Importante:** No subir el archivo `.env` al repositorio. Las credenciales y claves secretas deben mantenerse privadas.
 
 ---
 
 ## 💻 Ejecución del proyecto
 
-Para iniciar el servidor en modo desarrollo, ejecutar:
+### Modo desarrollo
 
 ```bash
 npm run start:dev
@@ -486,7 +441,9 @@ npm run start:dev
 
 El servidor estará disponible en:
 
-`http://localhost:3000`
+```text
+http://localhost:4000
+```
 
 ### Compilar el proyecto
 
@@ -500,43 +457,51 @@ npm run build
 npm run start:prod
 ```
 
-### Ejecutar pruebas
+### Validar el esquema de Prisma
 
 ```bash
-npm run test
+npx prisma validate
 ```
 
-### Ejecutar pruebas en modo observación
+### Generar Prisma Client
 
 ```bash
-npm run test:watch
+npx prisma generate
 ```
 
 ---
 
 ## 🧪 Pruebas con Postman
 
-Postman permite realizar solicitudes HTTP para comprobar el funcionamiento de los endpoints de la API.
+El proyecto cuenta con una colección de Postman para probar los endpoints de la API.
 
-Se pueden utilizar los siguientes métodos:
+Las pruebas permiten verificar:
 
-- **GET:** consultar información.
-- **POST:** registrar nuevos datos.
-- **PATCH:** actualizar información.
-- **DELETE:** eliminar registros.
+- Consultas de registros.
+- Consultas por identificador.
+- Creación de registros.
+- Modificación de registros.
+- Eliminación de registros.
+- Validaciones ante datos incorrectos.
+- Registro de usuarios.
+- Validación de usuarios duplicados.
+- Inicio de sesión.
+- Validación de credenciales incorrectas.
 
-La URL base para las pruebas locales es:
-
-`http://localhost:3000`
-
-Se recomienda organizar las solicitudes en colecciones separadas por módulo:
+La colección se encuentra organizada por módulos:
 
 - Equipos.
 - Jugadores.
-- Posiciones.
 - Partidos.
+- Posiciones.
+- Registro.
+- Login.
 
-Los módulos de autenticación y usuarios podrán incorporarse a las pruebas cuando su implementación funcional esté terminada.
+### URL base para las pruebas
+
+```text
+http://localhost:4000
+```
 
 ---
 
@@ -545,69 +510,59 @@ Los módulos de autenticación y usuarios podrán incorporarse a las pruebas cua
 ```text
 gestor-torneos-futbol-backend/
 │
+├── prisma/
+│   └── schema.prisma
+│
 ├── src/
-│   ├── main.ts
+│   ├── generated/
+│   │   └── prisma/
 │   │
-│   └── modules/
-│       │
-│       ├── app/
-│       │   ├── app.controller.ts
-│       │   ├── app.module.ts
-│       │   └── app.service.ts
-│       │
-│       ├── auth/
-│       │   ├── dto/
-│       │   ├── entities/
-│       │   ├── auth.controller.ts
-│       │   ├── auth.module.ts
-│       │   └── auth.service.ts
-│       │
-│       ├── equipos/
-│       │   ├── dto/
-│       │   │   ├── create-equipo.dto.ts
-│       │   │   └── update-equipo.dto.ts
-│       │   ├── entities/
-│       │   │   └── equipo.entity.ts
-│       │   ├── equipos.controller.ts
-│       │   ├── equipos.module.ts
-│       │   └── equipos.service.ts
-│       │
-│       ├── jugadores/
-│       │   ├── dto/
-│       │   │   ├── create-jugadore.dto.ts
-│       │   │   └── update-jugadore.dto.ts
-│       │   ├── entities/
-│       │   │   └── jugadore.entity.ts
-│       │   ├── jugadores.controller.ts
-│       │   ├── jugadores.module.ts
-│       │   └── jugadores.service.ts
-│       │
-│       ├── partidos/
-│       │   ├── dto/
-│       │   │   ├── create-partido.dto.ts
-│       │   │   └── update-partido.dto.ts
-│       │   ├── entities/
-│       │   │   └── partido.entity.ts
-│       │   ├── partidos.controller.ts
-│       │   ├── partidos.module.ts
-│       │   └── partidos.service.ts
-│       │
-│       ├── posiciones/
-│       │   ├── dto/
-│       │   ├── entities/
-│       │   │   └── posicione.entity.ts
-│       │   ├── posiciones.controller.ts
-│       │   ├── posiciones.module.ts
-│       │   └── posiciones.service.ts
-│       │
-│       └── users/
-│           ├── dto/
-│           ├── entities/
-│           ├── users.controller.ts
-│           ├── users.module.ts
-│           └── users.service.ts
+│   ├── modules/
+│   │   ├── app/
+│   │   │   ├── app.controller.ts
+│   │   │   ├── app.module.ts
+│   │   │   └── app.service.ts
+│   │   │
+│   │   ├── prisma/
+│   │   │   ├── prisma.module.ts
+│   │   │   └── prisma.service.ts
+│   │   │
+│   │   ├── equipos/
+│   │   │   ├── dto/
+│   │   │   ├── equipos.controller.ts
+│   │   │   ├── equipos.module.ts
+│   │   │   └── equipos.service.ts
+│   │   │
+│   │   ├── jugadores/
+│   │   │   ├── dto/
+│   │   │   ├── jugadores.controller.ts
+│   │   │   ├── jugadores.module.ts
+│   │   │   └── jugadores.service.ts
+│   │   │
+│   │   ├── partidos/
+│   │   │   ├── dto/
+│   │   │   ├── partidos.controller.ts
+│   │   │   ├── partidos.module.ts
+│   │   │   └── partidos.service.ts
+│   │   │
+│   │   ├── posiciones/
+│   │   │   ├── dto/
+│   │   │   ├── posiciones.controller.ts
+│   │   │   ├── posiciones.module.ts
+│   │   │   └── posiciones.service.ts
+│   │   │
+│   │   └── auth/
+│   │       ├── dto/
+│   │       ├── auth.controller.ts
+│   │       ├── auth.module.ts
+│   │       └── auth.service.ts
+│   │
+│   ├── main.ts
+│   └── ...
 │
 ├── postman/
+│
+├── .env
 ├── .gitignore
 ├── nest-cli.json
 ├── package.json
@@ -621,86 +576,77 @@ gestor-torneos-futbol-backend/
 
 ## 🌿 Organización de Git
 
-El proyecto utiliza Git y GitHub para gestionar los cambios y organizar el desarrollo mediante ramas.
+El proyecto utiliza Git y GitHub para el control de versiones y organización del desarrollo.
 
 ### Ramas principales
 
-| Rama                        | Utilización                                                     |
-| --------------------------- | --------------------------------------------------------------- |
-| `main`                      | Versión estable del proyecto.                                   |
-| `dev`                       | Integración de las funcionalidades desarrolladas.               |
-| `feature/estructura-nestjs` | Creación de la estructura inicial de NestJS.                    |
-| `feature/conexion-mysql`    | Conexión con MySQL, entidades, servicios CRUD y nuevos módulos. |
+| Rama        | Utilización                               |
+| ----------- | ----------------------------------------- |
+| `main`      | Versión estable del proyecto              |
+| `dev`       | Integración de funcionalidades            |
+| `feature/*` | Desarrollo de funcionalidades específicas |
 
 ### Convención de commits
 
-Se utilizan mensajes descriptivos para identificar los cambios realizados.
+Se utilizan mensajes descriptivos para identificar los cambios.
 
 Ejemplos:
 
 ```bash
 git commit -m "feat: agregar modulo de equipos"
-
-git commit -m "feat: integrar conexion con MySQL"
-
-git commit -m "feat: agregar modulo de posiciones"
-
-git commit -m "fix: corregir conexion con MySQL"
-
-git commit -m "refactor: organizar servicios"
-
-git commit -m "docs: actualizar README"
 ```
 
-Las funcionalidades se desarrollan en ramas independientes y posteriormente se integran mediante Pull Requests.
+```bash
+git commit -m "feat: integrar Prisma con MySQL"
+```
+
+```bash
+git commit -m "feat: implementar autenticacion JWT"
+```
+
+```bash
+git commit -m "fix: corregir validaciones de jugadores"
+```
+
+```bash
+git commit -m "docs: actualizar README"
+```
 
 ---
 
 ## 📌 Estado del proyecto
 
-El proyecto se encuentra en desarrollo.
-
-### Funcionalidades implementadas
+El proyecto cuenta con las siguientes funcionalidades implementadas:
 
 - [x] Creación del proyecto NestJS.
-- [x] Organización de la estructura modular.
-- [x] Creación de los módulos de equipos, jugadores y partidos.
+- [x] Arquitectura modular.
 - [x] Configuración de variables de entorno.
-- [x] Instalación de TypeORM y MySQL.
-- [x] Configuración de conexión con MySQL.
-- [x] Creación de entidades de equipos, jugadores y partidos.
-- [x] Configuración de relaciones entre entidades.
-- [x] Implementación de servicios CRUD de equipos, jugadores y partidos.
-- [x] Implementación de validaciones mediante DTO.
+- [x] Conexión con MySQL.
+- [x] Integración de Prisma ORM.
+- [x] Modelos de base de datos.
+- [x] CRUD de equipos.
+- [x] CRUD de jugadores.
+- [x] CRUD de partidos.
+- [x] CRUD de posiciones.
+- [x] DTO para validación de datos.
 - [x] Configuración de ValidationPipe global.
-- [x] Creación de la estructura inicial del módulo de posiciones.
-- [x] Incorporación de la estructura inicial de Auth.
-- [x] Incorporación de la estructura inicial de Users.
-
-### Funcionalidades pendientes
-
-- [ ] Implementar la lógica CRUD del módulo de posiciones.
-- [ ] Integrar el módulo de autenticación.
-- [ ] Implementar registro e inicio de sesión.
-- [ ] Implementar gestión funcional de usuarios.
-- [ ] Incorporar mecanismos de seguridad y autorización.
-- [ ] Integrar y documentar las pruebas de todos los endpoints.
-- [ ] Completar las pruebas de integración.
-- [ ] Documentar la configuración y creación de la base de datos.
-- [ ] Completar la documentación técnica del proyecto.
+- [x] Registro de usuarios.
+- [x] Inicio de sesión.
+- [x] Encriptación de contraseñas.
+- [x] Autenticación JWT.
+- [x] Pruebas de endpoints mediante Postman.
+- [x] Organización de módulos y servicios.
 
 ---
 
 ## 👨‍💻 Autor
 
-<div align="center">
+**Romano Gabriel Nicolás**
 
-**Romano Gabriel Nicolas**
+Proyecto académico — Gestor de Torneos de Fútbol.
 
-Proyecto académico — Gestor de Torneos de Fútbol
+Desarrollado utilizando NestJS, TypeScript, Prisma y MySQL.
 
-Desarrollado con ❤️ utilizando NestJS, TypeScript y MySQL.
+GitHub:
 
-[GitHub](https://github.com/romanogabrielnicolas-hue)
-
-</div>
+https://github.com/romanogabrielnicolas-hue
