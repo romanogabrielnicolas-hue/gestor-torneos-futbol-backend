@@ -10,6 +10,7 @@ import { JugadoresModule } from '../jugadores/jugadores.module';
 import { PartidosModule } from '../partidos/partidos.module';
 import { PosicionesModule } from '../posiciones/posiciones.module';
 import { AuthModule } from '../auth/auth.module';
+import { UsersModule } from '../users/users.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { AuthModule } from '../auth/auth.module';
     PartidosModule,
     PosicionesModule,
     AuthModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
