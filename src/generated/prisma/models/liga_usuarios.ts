@@ -357,10 +357,6 @@ export type liga_usuariosUpdateOneRequiredWithoutEquiposNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.liga_usuariosUpdateToOneWithWhereWithoutEquiposInput, Prisma.liga_usuariosUpdateWithoutEquiposInput>, Prisma.liga_usuariosUncheckedUpdateWithoutEquiposInput>
 }
 
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
-}
-
 export type liga_usuariosCreateNestedManyWithoutLigasInput = {
   create?: Prisma.XOR<Prisma.liga_usuariosCreateWithoutLigasInput, Prisma.liga_usuariosUncheckedCreateWithoutLigasInput> | Prisma.liga_usuariosCreateWithoutLigasInput[] | Prisma.liga_usuariosUncheckedCreateWithoutLigasInput[]
   connectOrCreate?: Prisma.liga_usuariosCreateOrConnectWithoutLigasInput | Prisma.liga_usuariosCreateOrConnectWithoutLigasInput[]

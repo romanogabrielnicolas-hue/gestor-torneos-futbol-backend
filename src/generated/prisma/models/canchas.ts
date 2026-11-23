@@ -38,18 +38,24 @@ export type CanchasMinAggregateOutputType = {
   id: number | null
   nombre: string | null
   direccion: string | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type CanchasMaxAggregateOutputType = {
   id: number | null
   nombre: string | null
   direccion: string | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type CanchasCountAggregateOutputType = {
   id: number
   nombre: number
   direccion: number
+  created_at: number
+  updated_at: number
   _all: number
 }
 
@@ -66,18 +72,24 @@ export type CanchasMinAggregateInputType = {
   id?: true
   nombre?: true
   direccion?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type CanchasMaxAggregateInputType = {
   id?: true
   nombre?: true
   direccion?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type CanchasCountAggregateInputType = {
   id?: true
   nombre?: true
   direccion?: true
+  created_at?: true
+  updated_at?: true
   _all?: true
 }
 
@@ -171,6 +183,8 @@ export type CanchasGroupByOutputType = {
   id: number
   nombre: string
   direccion: string
+  created_at: Date
+  updated_at: Date
   _count: CanchasCountAggregateOutputType | null
   _avg: CanchasAvgAggregateOutputType | null
   _sum: CanchasSumAggregateOutputType | null
@@ -200,6 +214,8 @@ export type canchasWhereInput = {
   id?: Prisma.IntFilter<"canchas"> | number
   nombre?: Prisma.StringFilter<"canchas"> | string
   direccion?: Prisma.StringFilter<"canchas"> | string
+  created_at?: Prisma.DateTimeFilter<"canchas"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"canchas"> | Date | string
   partidos?: Prisma.PartidosListRelationFilter
 }
 
@@ -207,6 +223,8 @@ export type canchasOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   nombre?: Prisma.SortOrder
   direccion?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   partidos?: Prisma.partidosOrderByRelationAggregateInput
   _relevance?: Prisma.canchasOrderByRelevanceInput
 }
@@ -218,6 +236,8 @@ export type canchasWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.canchasWhereInput[]
   NOT?: Prisma.canchasWhereInput | Prisma.canchasWhereInput[]
   direccion?: Prisma.StringFilter<"canchas"> | string
+  created_at?: Prisma.DateTimeFilter<"canchas"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"canchas"> | Date | string
   partidos?: Prisma.PartidosListRelationFilter
 }, "id" | "nombre">
 
@@ -225,6 +245,8 @@ export type canchasOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   nombre?: Prisma.SortOrder
   direccion?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   _count?: Prisma.canchasCountOrderByAggregateInput
   _avg?: Prisma.canchasAvgOrderByAggregateInput
   _max?: Prisma.canchasMaxOrderByAggregateInput
@@ -239,11 +261,15 @@ export type canchasScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"canchas"> | number
   nombre?: Prisma.StringWithAggregatesFilter<"canchas"> | string
   direccion?: Prisma.StringWithAggregatesFilter<"canchas"> | string
+  created_at?: Prisma.DateTimeWithAggregatesFilter<"canchas"> | Date | string
+  updated_at?: Prisma.DateTimeWithAggregatesFilter<"canchas"> | Date | string
 }
 
 export type canchasCreateInput = {
   nombre: string
   direccion: string
+  created_at?: Date | string
+  updated_at?: Date | string
   partidos?: Prisma.partidosCreateNestedManyWithoutCanchasInput
 }
 
@@ -251,12 +277,16 @@ export type canchasUncheckedCreateInput = {
   id?: number
   nombre: string
   direccion: string
+  created_at?: Date | string
+  updated_at?: Date | string
   partidos?: Prisma.partidosUncheckedCreateNestedManyWithoutCanchasInput
 }
 
 export type canchasUpdateInput = {
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   direccion?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   partidos?: Prisma.partidosUpdateManyWithoutCanchasNestedInput
 }
 
@@ -264,6 +294,8 @@ export type canchasUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   direccion?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   partidos?: Prisma.partidosUncheckedUpdateManyWithoutCanchasNestedInput
 }
 
@@ -271,17 +303,23 @@ export type canchasCreateManyInput = {
   id?: number
   nombre: string
   direccion: string
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type canchasUpdateManyMutationInput = {
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   direccion?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type canchasUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   direccion?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type canchasOrderByRelevanceInput = {
@@ -294,6 +332,8 @@ export type canchasCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nombre?: Prisma.SortOrder
   direccion?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type canchasAvgOrderByAggregateInput = {
@@ -304,12 +344,16 @@ export type canchasMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nombre?: Prisma.SortOrder
   direccion?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type canchasMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nombre?: Prisma.SortOrder
   direccion?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type canchasSumOrderByAggregateInput = {
@@ -323,6 +367,10 @@ export type CanchasScalarRelationFilter = {
 
 export type StringFieldUpdateOperationsInput = {
   set?: string
+}
+
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
 }
 
 export type IntFieldUpdateOperationsInput = {
@@ -350,12 +398,16 @@ export type canchasUpdateOneRequiredWithoutPartidosNestedInput = {
 export type canchasCreateWithoutPartidosInput = {
   nombre: string
   direccion: string
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type canchasUncheckedCreateWithoutPartidosInput = {
   id?: number
   nombre: string
   direccion: string
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type canchasCreateOrConnectWithoutPartidosInput = {
@@ -377,12 +429,16 @@ export type canchasUpdateToOneWithWhereWithoutPartidosInput = {
 export type canchasUpdateWithoutPartidosInput = {
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   direccion?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type canchasUncheckedUpdateWithoutPartidosInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   direccion?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -420,6 +476,8 @@ export type canchasSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   id?: boolean
   nombre?: boolean
   direccion?: boolean
+  created_at?: boolean
+  updated_at?: boolean
   partidos?: boolean | Prisma.canchas$partidosArgs<ExtArgs>
   _count?: boolean | Prisma.CanchasCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["canchas"]>
@@ -430,9 +488,11 @@ export type canchasSelectScalar = {
   id?: boolean
   nombre?: boolean
   direccion?: boolean
+  created_at?: boolean
+  updated_at?: boolean
 }
 
-export type canchasOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nombre" | "direccion", ExtArgs["result"]["canchas"]>
+export type canchasOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nombre" | "direccion" | "created_at" | "updated_at", ExtArgs["result"]["canchas"]>
 export type canchasInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   partidos?: boolean | Prisma.canchas$partidosArgs<ExtArgs>
   _count?: boolean | Prisma.CanchasCountOutputTypeDefaultArgs<ExtArgs>
@@ -447,6 +507,8 @@ export type $canchasPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     id: number
     nombre: string
     direccion: string
+    created_at: Date
+    updated_at: Date
   }, ExtArgs["result"]["canchas"]>
   composites: {}
 }
@@ -820,6 +882,8 @@ export interface canchasFieldRefs {
   readonly id: Prisma.FieldRef<"canchas", 'Int'>
   readonly nombre: Prisma.FieldRef<"canchas", 'String'>
   readonly direccion: Prisma.FieldRef<"canchas", 'String'>
+  readonly created_at: Prisma.FieldRef<"canchas", 'DateTime'>
+  readonly updated_at: Prisma.FieldRef<"canchas", 'DateTime'>
 }
     
 

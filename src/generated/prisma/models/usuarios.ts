@@ -40,6 +40,7 @@ export type UsuariosMinAggregateOutputType = {
   email: string | null
   password: string | null
   created_at: Date | null
+  updated_at: Date | null
 }
 
 export type UsuariosMaxAggregateOutputType = {
@@ -48,6 +49,7 @@ export type UsuariosMaxAggregateOutputType = {
   email: string | null
   password: string | null
   created_at: Date | null
+  updated_at: Date | null
 }
 
 export type UsuariosCountAggregateOutputType = {
@@ -56,6 +58,7 @@ export type UsuariosCountAggregateOutputType = {
   email: number
   password: number
   created_at: number
+  updated_at: number
   _all: number
 }
 
@@ -74,6 +77,7 @@ export type UsuariosMinAggregateInputType = {
   email?: true
   password?: true
   created_at?: true
+  updated_at?: true
 }
 
 export type UsuariosMaxAggregateInputType = {
@@ -82,6 +86,7 @@ export type UsuariosMaxAggregateInputType = {
   email?: true
   password?: true
   created_at?: true
+  updated_at?: true
 }
 
 export type UsuariosCountAggregateInputType = {
@@ -90,6 +95,7 @@ export type UsuariosCountAggregateInputType = {
   email?: true
   password?: true
   created_at?: true
+  updated_at?: true
   _all?: true
 }
 
@@ -185,6 +191,7 @@ export type UsuariosGroupByOutputType = {
   email: string
   password: string
   created_at: Date
+  updated_at: Date
   _count: UsuariosCountAggregateOutputType | null
   _avg: UsuariosAvgAggregateOutputType | null
   _sum: UsuariosSumAggregateOutputType | null
@@ -216,6 +223,7 @@ export type usuariosWhereInput = {
   email?: Prisma.StringFilter<"usuarios"> | string
   password?: Prisma.StringFilter<"usuarios"> | string
   created_at?: Prisma.DateTimeFilter<"usuarios"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"usuarios"> | Date | string
   liga_usuarios?: Prisma.Liga_usuariosListRelationFilter
   ligas?: Prisma.LigasListRelationFilter
 }
@@ -226,6 +234,7 @@ export type usuariosOrderByWithRelationInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   liga_usuarios?: Prisma.liga_usuariosOrderByRelationAggregateInput
   ligas?: Prisma.ligasOrderByRelationAggregateInput
   _relevance?: Prisma.usuariosOrderByRelevanceInput
@@ -240,6 +249,7 @@ export type usuariosWhereUniqueInput = Prisma.AtLeast<{
   nombre?: Prisma.StringFilter<"usuarios"> | string
   password?: Prisma.StringFilter<"usuarios"> | string
   created_at?: Prisma.DateTimeFilter<"usuarios"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"usuarios"> | Date | string
   liga_usuarios?: Prisma.Liga_usuariosListRelationFilter
   ligas?: Prisma.LigasListRelationFilter
 }, "id" | "email">
@@ -250,6 +260,7 @@ export type usuariosOrderByWithAggregationInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   _count?: Prisma.usuariosCountOrderByAggregateInput
   _avg?: Prisma.usuariosAvgOrderByAggregateInput
   _max?: Prisma.usuariosMaxOrderByAggregateInput
@@ -266,6 +277,7 @@ export type usuariosScalarWhereWithAggregatesInput = {
   email?: Prisma.StringWithAggregatesFilter<"usuarios"> | string
   password?: Prisma.StringWithAggregatesFilter<"usuarios"> | string
   created_at?: Prisma.DateTimeWithAggregatesFilter<"usuarios"> | Date | string
+  updated_at?: Prisma.DateTimeWithAggregatesFilter<"usuarios"> | Date | string
 }
 
 export type usuariosCreateInput = {
@@ -273,6 +285,7 @@ export type usuariosCreateInput = {
   email: string
   password: string
   created_at?: Date | string
+  updated_at?: Date | string
   liga_usuarios?: Prisma.liga_usuariosCreateNestedManyWithoutUsuariosInput
   ligas?: Prisma.ligasCreateNestedManyWithoutUsuariosInput
 }
@@ -283,6 +296,7 @@ export type usuariosUncheckedCreateInput = {
   email: string
   password: string
   created_at?: Date | string
+  updated_at?: Date | string
   liga_usuarios?: Prisma.liga_usuariosUncheckedCreateNestedManyWithoutUsuariosInput
   ligas?: Prisma.ligasUncheckedCreateNestedManyWithoutUsuariosInput
 }
@@ -292,6 +306,7 @@ export type usuariosUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   liga_usuarios?: Prisma.liga_usuariosUpdateManyWithoutUsuariosNestedInput
   ligas?: Prisma.ligasUpdateManyWithoutUsuariosNestedInput
 }
@@ -302,6 +317,7 @@ export type usuariosUncheckedUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   liga_usuarios?: Prisma.liga_usuariosUncheckedUpdateManyWithoutUsuariosNestedInput
   ligas?: Prisma.ligasUncheckedUpdateManyWithoutUsuariosNestedInput
 }
@@ -312,6 +328,7 @@ export type usuariosCreateManyInput = {
   email: string
   password: string
   created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type usuariosUpdateManyMutationInput = {
@@ -319,6 +336,7 @@ export type usuariosUpdateManyMutationInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type usuariosUncheckedUpdateManyInput = {
@@ -327,6 +345,7 @@ export type usuariosUncheckedUpdateManyInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UsuariosScalarRelationFilter = {
@@ -346,6 +365,7 @@ export type usuariosCountOrderByAggregateInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type usuariosAvgOrderByAggregateInput = {
@@ -358,6 +378,7 @@ export type usuariosMaxOrderByAggregateInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type usuariosMinOrderByAggregateInput = {
@@ -366,6 +387,7 @@ export type usuariosMinOrderByAggregateInput = {
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type usuariosSumOrderByAggregateInput = {
@@ -405,6 +427,7 @@ export type usuariosCreateWithoutLiga_usuariosInput = {
   email: string
   password: string
   created_at?: Date | string
+  updated_at?: Date | string
   ligas?: Prisma.ligasCreateNestedManyWithoutUsuariosInput
 }
 
@@ -414,6 +437,7 @@ export type usuariosUncheckedCreateWithoutLiga_usuariosInput = {
   email: string
   password: string
   created_at?: Date | string
+  updated_at?: Date | string
   ligas?: Prisma.ligasUncheckedCreateNestedManyWithoutUsuariosInput
 }
 
@@ -438,6 +462,7 @@ export type usuariosUpdateWithoutLiga_usuariosInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ligas?: Prisma.ligasUpdateManyWithoutUsuariosNestedInput
 }
 
@@ -447,6 +472,7 @@ export type usuariosUncheckedUpdateWithoutLiga_usuariosInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ligas?: Prisma.ligasUncheckedUpdateManyWithoutUsuariosNestedInput
 }
 
@@ -455,6 +481,7 @@ export type usuariosCreateWithoutLigasInput = {
   email: string
   password: string
   created_at?: Date | string
+  updated_at?: Date | string
   liga_usuarios?: Prisma.liga_usuariosCreateNestedManyWithoutUsuariosInput
 }
 
@@ -464,6 +491,7 @@ export type usuariosUncheckedCreateWithoutLigasInput = {
   email: string
   password: string
   created_at?: Date | string
+  updated_at?: Date | string
   liga_usuarios?: Prisma.liga_usuariosUncheckedCreateNestedManyWithoutUsuariosInput
 }
 
@@ -488,6 +516,7 @@ export type usuariosUpdateWithoutLigasInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   liga_usuarios?: Prisma.liga_usuariosUpdateManyWithoutUsuariosNestedInput
 }
 
@@ -497,6 +526,7 @@ export type usuariosUncheckedUpdateWithoutLigasInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   liga_usuarios?: Prisma.liga_usuariosUncheckedUpdateManyWithoutUsuariosNestedInput
 }
 
@@ -546,6 +576,7 @@ export type usuariosSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   email?: boolean
   password?: boolean
   created_at?: boolean
+  updated_at?: boolean
   liga_usuarios?: boolean | Prisma.usuarios$liga_usuariosArgs<ExtArgs>
   ligas?: boolean | Prisma.usuarios$ligasArgs<ExtArgs>
   _count?: boolean | Prisma.UsuariosCountOutputTypeDefaultArgs<ExtArgs>
@@ -559,9 +590,10 @@ export type usuariosSelectScalar = {
   email?: boolean
   password?: boolean
   created_at?: boolean
+  updated_at?: boolean
 }
 
-export type usuariosOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nombre" | "email" | "password" | "created_at", ExtArgs["result"]["usuarios"]>
+export type usuariosOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nombre" | "email" | "password" | "created_at" | "updated_at", ExtArgs["result"]["usuarios"]>
 export type usuariosInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   liga_usuarios?: boolean | Prisma.usuarios$liga_usuariosArgs<ExtArgs>
   ligas?: boolean | Prisma.usuarios$ligasArgs<ExtArgs>
@@ -580,6 +612,7 @@ export type $usuariosPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     email: string
     password: string
     created_at: Date
+    updated_at: Date
   }, ExtArgs["result"]["usuarios"]>
   composites: {}
 }
@@ -956,6 +989,7 @@ export interface usuariosFieldRefs {
   readonly email: Prisma.FieldRef<"usuarios", 'String'>
   readonly password: Prisma.FieldRef<"usuarios", 'String'>
   readonly created_at: Prisma.FieldRef<"usuarios", 'DateTime'>
+  readonly updated_at: Prisma.FieldRef<"usuarios", 'DateTime'>
 }
     
 

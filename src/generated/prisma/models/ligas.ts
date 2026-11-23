@@ -41,6 +41,7 @@ export type LigasMinAggregateOutputType = {
   nombre: string | null
   creador_id: number | null
   created_at: Date | null
+  updated_at: Date | null
 }
 
 export type LigasMaxAggregateOutputType = {
@@ -48,6 +49,7 @@ export type LigasMaxAggregateOutputType = {
   nombre: string | null
   creador_id: number | null
   created_at: Date | null
+  updated_at: Date | null
 }
 
 export type LigasCountAggregateOutputType = {
@@ -55,6 +57,7 @@ export type LigasCountAggregateOutputType = {
   nombre: number
   creador_id: number
   created_at: number
+  updated_at: number
   _all: number
 }
 
@@ -74,6 +77,7 @@ export type LigasMinAggregateInputType = {
   nombre?: true
   creador_id?: true
   created_at?: true
+  updated_at?: true
 }
 
 export type LigasMaxAggregateInputType = {
@@ -81,6 +85,7 @@ export type LigasMaxAggregateInputType = {
   nombre?: true
   creador_id?: true
   created_at?: true
+  updated_at?: true
 }
 
 export type LigasCountAggregateInputType = {
@@ -88,6 +93,7 @@ export type LigasCountAggregateInputType = {
   nombre?: true
   creador_id?: true
   created_at?: true
+  updated_at?: true
   _all?: true
 }
 
@@ -182,6 +188,7 @@ export type LigasGroupByOutputType = {
   nombre: string
   creador_id: number
   created_at: Date
+  updated_at: Date
   _count: LigasCountAggregateOutputType | null
   _avg: LigasAvgAggregateOutputType | null
   _sum: LigasSumAggregateOutputType | null
@@ -212,6 +219,7 @@ export type ligasWhereInput = {
   nombre?: Prisma.StringFilter<"ligas"> | string
   creador_id?: Prisma.IntFilter<"ligas"> | number
   created_at?: Prisma.DateTimeFilter<"ligas"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"ligas"> | Date | string
   liga_usuarios?: Prisma.Liga_usuariosListRelationFilter
   usuarios?: Prisma.XOR<Prisma.UsuariosScalarRelationFilter, Prisma.usuariosWhereInput>
 }
@@ -221,6 +229,7 @@ export type ligasOrderByWithRelationInput = {
   nombre?: Prisma.SortOrder
   creador_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   liga_usuarios?: Prisma.liga_usuariosOrderByRelationAggregateInput
   usuarios?: Prisma.usuariosOrderByWithRelationInput
   _relevance?: Prisma.ligasOrderByRelevanceInput
@@ -234,6 +243,7 @@ export type ligasWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ligasWhereInput | Prisma.ligasWhereInput[]
   creador_id?: Prisma.IntFilter<"ligas"> | number
   created_at?: Prisma.DateTimeFilter<"ligas"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"ligas"> | Date | string
   liga_usuarios?: Prisma.Liga_usuariosListRelationFilter
   usuarios?: Prisma.XOR<Prisma.UsuariosScalarRelationFilter, Prisma.usuariosWhereInput>
 }, "id" | "nombre">
@@ -243,6 +253,7 @@ export type ligasOrderByWithAggregationInput = {
   nombre?: Prisma.SortOrder
   creador_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   _count?: Prisma.ligasCountOrderByAggregateInput
   _avg?: Prisma.ligasAvgOrderByAggregateInput
   _max?: Prisma.ligasMaxOrderByAggregateInput
@@ -258,11 +269,13 @@ export type ligasScalarWhereWithAggregatesInput = {
   nombre?: Prisma.StringWithAggregatesFilter<"ligas"> | string
   creador_id?: Prisma.IntWithAggregatesFilter<"ligas"> | number
   created_at?: Prisma.DateTimeWithAggregatesFilter<"ligas"> | Date | string
+  updated_at?: Prisma.DateTimeWithAggregatesFilter<"ligas"> | Date | string
 }
 
 export type ligasCreateInput = {
   nombre: string
   created_at?: Date | string
+  updated_at?: Date | string
   liga_usuarios?: Prisma.liga_usuariosCreateNestedManyWithoutLigasInput
   usuarios: Prisma.usuariosCreateNestedOneWithoutLigasInput
 }
@@ -272,12 +285,14 @@ export type ligasUncheckedCreateInput = {
   nombre: string
   creador_id: number
   created_at?: Date | string
+  updated_at?: Date | string
   liga_usuarios?: Prisma.liga_usuariosUncheckedCreateNestedManyWithoutLigasInput
 }
 
 export type ligasUpdateInput = {
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   liga_usuarios?: Prisma.liga_usuariosUpdateManyWithoutLigasNestedInput
   usuarios?: Prisma.usuariosUpdateOneRequiredWithoutLigasNestedInput
 }
@@ -287,6 +302,7 @@ export type ligasUncheckedUpdateInput = {
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   creador_id?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   liga_usuarios?: Prisma.liga_usuariosUncheckedUpdateManyWithoutLigasNestedInput
 }
 
@@ -295,11 +311,13 @@ export type ligasCreateManyInput = {
   nombre: string
   creador_id: number
   created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type ligasUpdateManyMutationInput = {
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ligasUncheckedUpdateManyInput = {
@@ -307,6 +325,7 @@ export type ligasUncheckedUpdateManyInput = {
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   creador_id?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LigasScalarRelationFilter = {
@@ -325,6 +344,7 @@ export type ligasCountOrderByAggregateInput = {
   nombre?: Prisma.SortOrder
   creador_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type ligasAvgOrderByAggregateInput = {
@@ -337,6 +357,7 @@ export type ligasMaxOrderByAggregateInput = {
   nombre?: Prisma.SortOrder
   creador_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type ligasMinOrderByAggregateInput = {
@@ -344,6 +365,7 @@ export type ligasMinOrderByAggregateInput = {
   nombre?: Prisma.SortOrder
   creador_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type ligasSumOrderByAggregateInput = {
@@ -420,6 +442,7 @@ export type ligasUncheckedUpdateManyWithoutUsuariosNestedInput = {
 export type ligasCreateWithoutLiga_usuariosInput = {
   nombre: string
   created_at?: Date | string
+  updated_at?: Date | string
   usuarios: Prisma.usuariosCreateNestedOneWithoutLigasInput
 }
 
@@ -428,6 +451,7 @@ export type ligasUncheckedCreateWithoutLiga_usuariosInput = {
   nombre: string
   creador_id: number
   created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type ligasCreateOrConnectWithoutLiga_usuariosInput = {
@@ -449,6 +473,7 @@ export type ligasUpdateToOneWithWhereWithoutLiga_usuariosInput = {
 export type ligasUpdateWithoutLiga_usuariosInput = {
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   usuarios?: Prisma.usuariosUpdateOneRequiredWithoutLigasNestedInput
 }
 
@@ -457,11 +482,13 @@ export type ligasUncheckedUpdateWithoutLiga_usuariosInput = {
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   creador_id?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ligasCreateWithoutUsuariosInput = {
   nombre: string
   created_at?: Date | string
+  updated_at?: Date | string
   liga_usuarios?: Prisma.liga_usuariosCreateNestedManyWithoutLigasInput
 }
 
@@ -469,6 +496,7 @@ export type ligasUncheckedCreateWithoutUsuariosInput = {
   id?: number
   nombre: string
   created_at?: Date | string
+  updated_at?: Date | string
   liga_usuarios?: Prisma.liga_usuariosUncheckedCreateNestedManyWithoutLigasInput
 }
 
@@ -506,17 +534,20 @@ export type ligasScalarWhereInput = {
   nombre?: Prisma.StringFilter<"ligas"> | string
   creador_id?: Prisma.IntFilter<"ligas"> | number
   created_at?: Prisma.DateTimeFilter<"ligas"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"ligas"> | Date | string
 }
 
 export type ligasCreateManyUsuariosInput = {
   id?: number
   nombre: string
   created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type ligasUpdateWithoutUsuariosInput = {
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   liga_usuarios?: Prisma.liga_usuariosUpdateManyWithoutLigasNestedInput
 }
 
@@ -524,6 +555,7 @@ export type ligasUncheckedUpdateWithoutUsuariosInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   liga_usuarios?: Prisma.liga_usuariosUncheckedUpdateManyWithoutLigasNestedInput
 }
 
@@ -531,6 +563,7 @@ export type ligasUncheckedUpdateManyWithoutUsuariosInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -569,6 +602,7 @@ export type ligasSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   nombre?: boolean
   creador_id?: boolean
   created_at?: boolean
+  updated_at?: boolean
   liga_usuarios?: boolean | Prisma.ligas$liga_usuariosArgs<ExtArgs>
   usuarios?: boolean | Prisma.usuariosDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.LigasCountOutputTypeDefaultArgs<ExtArgs>
@@ -581,9 +615,10 @@ export type ligasSelectScalar = {
   nombre?: boolean
   creador_id?: boolean
   created_at?: boolean
+  updated_at?: boolean
 }
 
-export type ligasOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nombre" | "creador_id" | "created_at", ExtArgs["result"]["ligas"]>
+export type ligasOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nombre" | "creador_id" | "created_at" | "updated_at", ExtArgs["result"]["ligas"]>
 export type ligasInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   liga_usuarios?: boolean | Prisma.ligas$liga_usuariosArgs<ExtArgs>
   usuarios?: boolean | Prisma.usuariosDefaultArgs<ExtArgs>
@@ -601,6 +636,7 @@ export type $ligasPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     nombre: string
     creador_id: number
     created_at: Date
+    updated_at: Date
   }, ExtArgs["result"]["ligas"]>
   composites: {}
 }
@@ -976,6 +1012,7 @@ export interface ligasFieldRefs {
   readonly nombre: Prisma.FieldRef<"ligas", 'String'>
   readonly creador_id: Prisma.FieldRef<"ligas", 'Int'>
   readonly created_at: Prisma.FieldRef<"ligas", 'DateTime'>
+  readonly updated_at: Prisma.FieldRef<"ligas", 'DateTime'>
 }
     
 

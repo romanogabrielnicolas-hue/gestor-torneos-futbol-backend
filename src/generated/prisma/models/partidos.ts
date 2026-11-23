@@ -47,6 +47,8 @@ export type PartidosMinAggregateOutputType = {
   cancha_id: number | null
   fecha: Date | null
   hora: Date | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type PartidosMaxAggregateOutputType = {
@@ -56,6 +58,8 @@ export type PartidosMaxAggregateOutputType = {
   cancha_id: number | null
   fecha: Date | null
   hora: Date | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type PartidosCountAggregateOutputType = {
@@ -65,6 +69,8 @@ export type PartidosCountAggregateOutputType = {
   cancha_id: number
   fecha: number
   hora: number
+  created_at: number
+  updated_at: number
   _all: number
 }
 
@@ -90,6 +96,8 @@ export type PartidosMinAggregateInputType = {
   cancha_id?: true
   fecha?: true
   hora?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type PartidosMaxAggregateInputType = {
@@ -99,6 +107,8 @@ export type PartidosMaxAggregateInputType = {
   cancha_id?: true
   fecha?: true
   hora?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type PartidosCountAggregateInputType = {
@@ -108,6 +118,8 @@ export type PartidosCountAggregateInputType = {
   cancha_id?: true
   fecha?: true
   hora?: true
+  created_at?: true
+  updated_at?: true
   _all?: true
 }
 
@@ -204,6 +216,8 @@ export type PartidosGroupByOutputType = {
   cancha_id: number
   fecha: Date
   hora: Date
+  created_at: Date
+  updated_at: Date
   _count: PartidosCountAggregateOutputType | null
   _avg: PartidosAvgAggregateOutputType | null
   _sum: PartidosSumAggregateOutputType | null
@@ -236,6 +250,8 @@ export type partidosWhereInput = {
   cancha_id?: Prisma.IntFilter<"partidos"> | number
   fecha?: Prisma.DateTimeFilter<"partidos"> | Date | string
   hora?: Prisma.DateTimeFilter<"partidos"> | Date | string
+  created_at?: Prisma.DateTimeFilter<"partidos"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"partidos"> | Date | string
   canchas?: Prisma.XOR<Prisma.CanchasScalarRelationFilter, Prisma.canchasWhereInput>
   equipos_partidos_equipo_local_idToequipos?: Prisma.XOR<Prisma.EquiposScalarRelationFilter, Prisma.equiposWhereInput>
   equipos_partidos_equipo_visitante_idToequipos?: Prisma.XOR<Prisma.EquiposScalarRelationFilter, Prisma.equiposWhereInput>
@@ -248,6 +264,8 @@ export type partidosOrderByWithRelationInput = {
   cancha_id?: Prisma.SortOrder
   fecha?: Prisma.SortOrder
   hora?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   canchas?: Prisma.canchasOrderByWithRelationInput
   equipos_partidos_equipo_local_idToequipos?: Prisma.equiposOrderByWithRelationInput
   equipos_partidos_equipo_visitante_idToequipos?: Prisma.equiposOrderByWithRelationInput
@@ -264,6 +282,8 @@ export type partidosWhereUniqueInput = Prisma.AtLeast<{
   cancha_id?: Prisma.IntFilter<"partidos"> | number
   fecha?: Prisma.DateTimeFilter<"partidos"> | Date | string
   hora?: Prisma.DateTimeFilter<"partidos"> | Date | string
+  created_at?: Prisma.DateTimeFilter<"partidos"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"partidos"> | Date | string
   canchas?: Prisma.XOR<Prisma.CanchasScalarRelationFilter, Prisma.canchasWhereInput>
   equipos_partidos_equipo_local_idToequipos?: Prisma.XOR<Prisma.EquiposScalarRelationFilter, Prisma.equiposWhereInput>
   equipos_partidos_equipo_visitante_idToequipos?: Prisma.XOR<Prisma.EquiposScalarRelationFilter, Prisma.equiposWhereInput>
@@ -276,6 +296,8 @@ export type partidosOrderByWithAggregationInput = {
   cancha_id?: Prisma.SortOrder
   fecha?: Prisma.SortOrder
   hora?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   _count?: Prisma.partidosCountOrderByAggregateInput
   _avg?: Prisma.partidosAvgOrderByAggregateInput
   _max?: Prisma.partidosMaxOrderByAggregateInput
@@ -293,11 +315,15 @@ export type partidosScalarWhereWithAggregatesInput = {
   cancha_id?: Prisma.IntWithAggregatesFilter<"partidos"> | number
   fecha?: Prisma.DateTimeWithAggregatesFilter<"partidos"> | Date | string
   hora?: Prisma.DateTimeWithAggregatesFilter<"partidos"> | Date | string
+  created_at?: Prisma.DateTimeWithAggregatesFilter<"partidos"> | Date | string
+  updated_at?: Prisma.DateTimeWithAggregatesFilter<"partidos"> | Date | string
 }
 
 export type partidosCreateInput = {
   fecha: Date | string
   hora: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
   canchas: Prisma.canchasCreateNestedOneWithoutPartidosInput
   equipos_partidos_equipo_local_idToequipos: Prisma.equiposCreateNestedOneWithoutPartidos_partidos_equipo_local_idToequiposInput
   equipos_partidos_equipo_visitante_idToequipos: Prisma.equiposCreateNestedOneWithoutPartidos_partidos_equipo_visitante_idToequiposInput
@@ -310,11 +336,15 @@ export type partidosUncheckedCreateInput = {
   cancha_id: number
   fecha: Date | string
   hora: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type partidosUpdateInput = {
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   hora?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   canchas?: Prisma.canchasUpdateOneRequiredWithoutPartidosNestedInput
   equipos_partidos_equipo_local_idToequipos?: Prisma.equiposUpdateOneRequiredWithoutPartidos_partidos_equipo_local_idToequiposNestedInput
   equipos_partidos_equipo_visitante_idToequipos?: Prisma.equiposUpdateOneRequiredWithoutPartidos_partidos_equipo_visitante_idToequiposNestedInput
@@ -327,6 +357,8 @@ export type partidosUncheckedUpdateInput = {
   cancha_id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   hora?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type partidosCreateManyInput = {
@@ -336,11 +368,15 @@ export type partidosCreateManyInput = {
   cancha_id: number
   fecha: Date | string
   hora: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type partidosUpdateManyMutationInput = {
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   hora?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type partidosUncheckedUpdateManyInput = {
@@ -350,6 +386,8 @@ export type partidosUncheckedUpdateManyInput = {
   cancha_id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   hora?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type PartidosListRelationFilter = {
@@ -375,6 +413,8 @@ export type partidosCountOrderByAggregateInput = {
   cancha_id?: Prisma.SortOrder
   fecha?: Prisma.SortOrder
   hora?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type partidosAvgOrderByAggregateInput = {
@@ -391,6 +431,8 @@ export type partidosMaxOrderByAggregateInput = {
   cancha_id?: Prisma.SortOrder
   fecha?: Prisma.SortOrder
   hora?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type partidosMinOrderByAggregateInput = {
@@ -400,6 +442,8 @@ export type partidosMinOrderByAggregateInput = {
   cancha_id?: Prisma.SortOrder
   fecha?: Prisma.SortOrder
   hora?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type partidosSumOrderByAggregateInput = {
@@ -538,6 +582,8 @@ export type partidosUncheckedUpdateManyWithoutEquipos_partidos_equipo_visitante_
 export type partidosCreateWithoutCanchasInput = {
   fecha: Date | string
   hora: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
   equipos_partidos_equipo_local_idToequipos: Prisma.equiposCreateNestedOneWithoutPartidos_partidos_equipo_local_idToequiposInput
   equipos_partidos_equipo_visitante_idToequipos: Prisma.equiposCreateNestedOneWithoutPartidos_partidos_equipo_visitante_idToequiposInput
 }
@@ -548,6 +594,8 @@ export type partidosUncheckedCreateWithoutCanchasInput = {
   equipo_visitante_id: number
   fecha: Date | string
   hora: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type partidosCreateOrConnectWithoutCanchasInput = {
@@ -586,11 +634,15 @@ export type partidosScalarWhereInput = {
   cancha_id?: Prisma.IntFilter<"partidos"> | number
   fecha?: Prisma.DateTimeFilter<"partidos"> | Date | string
   hora?: Prisma.DateTimeFilter<"partidos"> | Date | string
+  created_at?: Prisma.DateTimeFilter<"partidos"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"partidos"> | Date | string
 }
 
 export type partidosCreateWithoutEquipos_partidos_equipo_local_idToequiposInput = {
   fecha: Date | string
   hora: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
   canchas: Prisma.canchasCreateNestedOneWithoutPartidosInput
   equipos_partidos_equipo_visitante_idToequipos: Prisma.equiposCreateNestedOneWithoutPartidos_partidos_equipo_visitante_idToequiposInput
 }
@@ -601,6 +653,8 @@ export type partidosUncheckedCreateWithoutEquipos_partidos_equipo_local_idToequi
   cancha_id: number
   fecha: Date | string
   hora: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type partidosCreateOrConnectWithoutEquipos_partidos_equipo_local_idToequiposInput = {
@@ -616,6 +670,8 @@ export type partidosCreateManyEquipos_partidos_equipo_local_idToequiposInputEnve
 export type partidosCreateWithoutEquipos_partidos_equipo_visitante_idToequiposInput = {
   fecha: Date | string
   hora: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
   canchas: Prisma.canchasCreateNestedOneWithoutPartidosInput
   equipos_partidos_equipo_local_idToequipos: Prisma.equiposCreateNestedOneWithoutPartidos_partidos_equipo_local_idToequiposInput
 }
@@ -626,6 +682,8 @@ export type partidosUncheckedCreateWithoutEquipos_partidos_equipo_visitante_idTo
   cancha_id: number
   fecha: Date | string
   hora: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type partidosCreateOrConnectWithoutEquipos_partidos_equipo_visitante_idToequiposInput = {
@@ -676,11 +734,15 @@ export type partidosCreateManyCanchasInput = {
   equipo_visitante_id: number
   fecha: Date | string
   hora: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type partidosUpdateWithoutCanchasInput = {
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   hora?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   equipos_partidos_equipo_local_idToequipos?: Prisma.equiposUpdateOneRequiredWithoutPartidos_partidos_equipo_local_idToequiposNestedInput
   equipos_partidos_equipo_visitante_idToequipos?: Prisma.equiposUpdateOneRequiredWithoutPartidos_partidos_equipo_visitante_idToequiposNestedInput
 }
@@ -691,6 +753,8 @@ export type partidosUncheckedUpdateWithoutCanchasInput = {
   equipo_visitante_id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   hora?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type partidosUncheckedUpdateManyWithoutCanchasInput = {
@@ -699,6 +763,8 @@ export type partidosUncheckedUpdateManyWithoutCanchasInput = {
   equipo_visitante_id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   hora?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type partidosCreateManyEquipos_partidos_equipo_local_idToequiposInput = {
@@ -707,6 +773,8 @@ export type partidosCreateManyEquipos_partidos_equipo_local_idToequiposInput = {
   cancha_id: number
   fecha: Date | string
   hora: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type partidosCreateManyEquipos_partidos_equipo_visitante_idToequiposInput = {
@@ -715,11 +783,15 @@ export type partidosCreateManyEquipos_partidos_equipo_visitante_idToequiposInput
   cancha_id: number
   fecha: Date | string
   hora: Date | string
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type partidosUpdateWithoutEquipos_partidos_equipo_local_idToequiposInput = {
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   hora?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   canchas?: Prisma.canchasUpdateOneRequiredWithoutPartidosNestedInput
   equipos_partidos_equipo_visitante_idToequipos?: Prisma.equiposUpdateOneRequiredWithoutPartidos_partidos_equipo_visitante_idToequiposNestedInput
 }
@@ -730,6 +802,8 @@ export type partidosUncheckedUpdateWithoutEquipos_partidos_equipo_local_idToequi
   cancha_id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   hora?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type partidosUncheckedUpdateManyWithoutEquipos_partidos_equipo_local_idToequiposInput = {
@@ -738,11 +812,15 @@ export type partidosUncheckedUpdateManyWithoutEquipos_partidos_equipo_local_idTo
   cancha_id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   hora?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type partidosUpdateWithoutEquipos_partidos_equipo_visitante_idToequiposInput = {
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   hora?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   canchas?: Prisma.canchasUpdateOneRequiredWithoutPartidosNestedInput
   equipos_partidos_equipo_local_idToequipos?: Prisma.equiposUpdateOneRequiredWithoutPartidos_partidos_equipo_local_idToequiposNestedInput
 }
@@ -753,6 +831,8 @@ export type partidosUncheckedUpdateWithoutEquipos_partidos_equipo_visitante_idTo
   cancha_id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   hora?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type partidosUncheckedUpdateManyWithoutEquipos_partidos_equipo_visitante_idToequiposInput = {
@@ -761,6 +841,8 @@ export type partidosUncheckedUpdateManyWithoutEquipos_partidos_equipo_visitante_
   cancha_id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   hora?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -772,6 +854,8 @@ export type partidosSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   cancha_id?: boolean
   fecha?: boolean
   hora?: boolean
+  created_at?: boolean
+  updated_at?: boolean
   canchas?: boolean | Prisma.canchasDefaultArgs<ExtArgs>
   equipos_partidos_equipo_local_idToequipos?: boolean | Prisma.equiposDefaultArgs<ExtArgs>
   equipos_partidos_equipo_visitante_idToequipos?: boolean | Prisma.equiposDefaultArgs<ExtArgs>
@@ -786,9 +870,11 @@ export type partidosSelectScalar = {
   cancha_id?: boolean
   fecha?: boolean
   hora?: boolean
+  created_at?: boolean
+  updated_at?: boolean
 }
 
-export type partidosOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "equipo_local_id" | "equipo_visitante_id" | "cancha_id" | "fecha" | "hora", ExtArgs["result"]["partidos"]>
+export type partidosOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "equipo_local_id" | "equipo_visitante_id" | "cancha_id" | "fecha" | "hora" | "created_at" | "updated_at", ExtArgs["result"]["partidos"]>
 export type partidosInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   canchas?: boolean | Prisma.canchasDefaultArgs<ExtArgs>
   equipos_partidos_equipo_local_idToequipos?: boolean | Prisma.equiposDefaultArgs<ExtArgs>
@@ -809,6 +895,8 @@ export type $partidosPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     cancha_id: number
     fecha: Date
     hora: Date
+    created_at: Date
+    updated_at: Date
   }, ExtArgs["result"]["partidos"]>
   composites: {}
 }
@@ -1187,6 +1275,8 @@ export interface partidosFieldRefs {
   readonly cancha_id: Prisma.FieldRef<"partidos", 'Int'>
   readonly fecha: Prisma.FieldRef<"partidos", 'DateTime'>
   readonly hora: Prisma.FieldRef<"partidos", 'DateTime'>
+  readonly created_at: Prisma.FieldRef<"partidos", 'DateTime'>
+  readonly updated_at: Prisma.FieldRef<"partidos", 'DateTime'>
 }
     
 
