@@ -37,16 +37,22 @@ export type PosicionesSumAggregateOutputType = {
 export type PosicionesMinAggregateOutputType = {
   id: number | null
   nombre: string | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type PosicionesMaxAggregateOutputType = {
   id: number | null
   nombre: string | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type PosicionesCountAggregateOutputType = {
   id: number
   nombre: number
+  created_at: number
+  updated_at: number
   _all: number
 }
 
@@ -62,16 +68,22 @@ export type PosicionesSumAggregateInputType = {
 export type PosicionesMinAggregateInputType = {
   id?: true
   nombre?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type PosicionesMaxAggregateInputType = {
   id?: true
   nombre?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type PosicionesCountAggregateInputType = {
   id?: true
   nombre?: true
+  created_at?: true
+  updated_at?: true
   _all?: true
 }
 
@@ -164,6 +176,8 @@ export type posicionesGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 export type PosicionesGroupByOutputType = {
   id: number
   nombre: string
+  created_at: Date
+  updated_at: Date
   _count: PosicionesCountAggregateOutputType | null
   _avg: PosicionesAvgAggregateOutputType | null
   _sum: PosicionesSumAggregateOutputType | null
@@ -192,12 +206,16 @@ export type posicionesWhereInput = {
   NOT?: Prisma.posicionesWhereInput | Prisma.posicionesWhereInput[]
   id?: Prisma.IntFilter<"posiciones"> | number
   nombre?: Prisma.StringFilter<"posiciones"> | string
+  created_at?: Prisma.DateTimeFilter<"posiciones"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"posiciones"> | Date | string
   jugadores?: Prisma.JugadoresListRelationFilter
 }
 
 export type posicionesOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   nombre?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   jugadores?: Prisma.jugadoresOrderByRelationAggregateInput
   _relevance?: Prisma.posicionesOrderByRelevanceInput
 }
@@ -208,12 +226,16 @@ export type posicionesWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.posicionesWhereInput | Prisma.posicionesWhereInput[]
   OR?: Prisma.posicionesWhereInput[]
   NOT?: Prisma.posicionesWhereInput | Prisma.posicionesWhereInput[]
+  created_at?: Prisma.DateTimeFilter<"posiciones"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"posiciones"> | Date | string
   jugadores?: Prisma.JugadoresListRelationFilter
 }, "id" | "nombre">
 
 export type posicionesOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   nombre?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   _count?: Prisma.posicionesCountOrderByAggregateInput
   _avg?: Prisma.posicionesAvgOrderByAggregateInput
   _max?: Prisma.posicionesMaxOrderByAggregateInput
@@ -227,42 +249,58 @@ export type posicionesScalarWhereWithAggregatesInput = {
   NOT?: Prisma.posicionesScalarWhereWithAggregatesInput | Prisma.posicionesScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"posiciones"> | number
   nombre?: Prisma.StringWithAggregatesFilter<"posiciones"> | string
+  created_at?: Prisma.DateTimeWithAggregatesFilter<"posiciones"> | Date | string
+  updated_at?: Prisma.DateTimeWithAggregatesFilter<"posiciones"> | Date | string
 }
 
 export type posicionesCreateInput = {
   nombre: string
+  created_at?: Date | string
+  updated_at?: Date | string
   jugadores?: Prisma.jugadoresCreateNestedManyWithoutPosicionesInput
 }
 
 export type posicionesUncheckedCreateInput = {
   id?: number
   nombre: string
+  created_at?: Date | string
+  updated_at?: Date | string
   jugadores?: Prisma.jugadoresUncheckedCreateNestedManyWithoutPosicionesInput
 }
 
 export type posicionesUpdateInput = {
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jugadores?: Prisma.jugadoresUpdateManyWithoutPosicionesNestedInput
 }
 
 export type posicionesUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   jugadores?: Prisma.jugadoresUncheckedUpdateManyWithoutPosicionesNestedInput
 }
 
 export type posicionesCreateManyInput = {
   id?: number
   nombre: string
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type posicionesUpdateManyMutationInput = {
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type posicionesUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type PosicionesScalarRelationFilter = {
@@ -279,6 +317,8 @@ export type posicionesOrderByRelevanceInput = {
 export type posicionesCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nombre?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type posicionesAvgOrderByAggregateInput = {
@@ -288,11 +328,15 @@ export type posicionesAvgOrderByAggregateInput = {
 export type posicionesMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nombre?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type posicionesMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nombre?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type posicionesSumOrderByAggregateInput = {
@@ -315,11 +359,15 @@ export type posicionesUpdateOneRequiredWithoutJugadoresNestedInput = {
 
 export type posicionesCreateWithoutJugadoresInput = {
   nombre: string
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type posicionesUncheckedCreateWithoutJugadoresInput = {
   id?: number
   nombre: string
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type posicionesCreateOrConnectWithoutJugadoresInput = {
@@ -340,11 +388,15 @@ export type posicionesUpdateToOneWithWhereWithoutJugadoresInput = {
 
 export type posicionesUpdateWithoutJugadoresInput = {
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type posicionesUncheckedUpdateWithoutJugadoresInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -381,6 +433,8 @@ export type PosicionesCountOutputTypeCountJugadoresArgs<ExtArgs extends runtime.
 export type posicionesSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   nombre?: boolean
+  created_at?: boolean
+  updated_at?: boolean
   jugadores?: boolean | Prisma.posiciones$jugadoresArgs<ExtArgs>
   _count?: boolean | Prisma.PosicionesCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["posiciones"]>
@@ -390,9 +444,11 @@ export type posicionesSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
 export type posicionesSelectScalar = {
   id?: boolean
   nombre?: boolean
+  created_at?: boolean
+  updated_at?: boolean
 }
 
-export type posicionesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nombre", ExtArgs["result"]["posiciones"]>
+export type posicionesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nombre" | "created_at" | "updated_at", ExtArgs["result"]["posiciones"]>
 export type posicionesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   jugadores?: boolean | Prisma.posiciones$jugadoresArgs<ExtArgs>
   _count?: boolean | Prisma.PosicionesCountOutputTypeDefaultArgs<ExtArgs>
@@ -406,6 +462,8 @@ export type $posicionesPayload<ExtArgs extends runtime.Types.Extensions.Internal
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     nombre: string
+    created_at: Date
+    updated_at: Date
   }, ExtArgs["result"]["posiciones"]>
   composites: {}
 }
@@ -778,6 +836,8 @@ export interface Prisma__posicionesClient<T, Null = never, ExtArgs extends runti
 export interface posicionesFieldRefs {
   readonly id: Prisma.FieldRef<"posiciones", 'Int'>
   readonly nombre: Prisma.FieldRef<"posiciones", 'String'>
+  readonly created_at: Prisma.FieldRef<"posiciones", 'DateTime'>
+  readonly updated_at: Prisma.FieldRef<"posiciones", 'DateTime'>
 }
     
 
