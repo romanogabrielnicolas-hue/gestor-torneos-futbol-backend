@@ -50,6 +50,8 @@ export type JugadoresMinAggregateOutputType = {
   numero: number | null
   posicion_id: number | null
   equipo_id: number | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type JugadoresMaxAggregateOutputType = {
@@ -60,6 +62,8 @@ export type JugadoresMaxAggregateOutputType = {
   numero: number | null
   posicion_id: number | null
   equipo_id: number | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type JugadoresCountAggregateOutputType = {
@@ -70,6 +74,8 @@ export type JugadoresCountAggregateOutputType = {
   numero: number
   posicion_id: number
   equipo_id: number
+  created_at: number
+  updated_at: number
   _all: number
 }
 
@@ -98,6 +104,8 @@ export type JugadoresMinAggregateInputType = {
   numero?: true
   posicion_id?: true
   equipo_id?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type JugadoresMaxAggregateInputType = {
@@ -108,6 +116,8 @@ export type JugadoresMaxAggregateInputType = {
   numero?: true
   posicion_id?: true
   equipo_id?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type JugadoresCountAggregateInputType = {
@@ -118,6 +128,8 @@ export type JugadoresCountAggregateInputType = {
   numero?: true
   posicion_id?: true
   equipo_id?: true
+  created_at?: true
+  updated_at?: true
   _all?: true
 }
 
@@ -215,6 +227,8 @@ export type JugadoresGroupByOutputType = {
   numero: number
   posicion_id: number
   equipo_id: number
+  created_at: Date
+  updated_at: Date
   _count: JugadoresCountAggregateOutputType | null
   _avg: JugadoresAvgAggregateOutputType | null
   _sum: JugadoresSumAggregateOutputType | null
@@ -248,6 +262,8 @@ export type jugadoresWhereInput = {
   numero?: Prisma.IntFilter<"jugadores"> | number
   posicion_id?: Prisma.IntFilter<"jugadores"> | number
   equipo_id?: Prisma.IntFilter<"jugadores"> | number
+  created_at?: Prisma.DateTimeFilter<"jugadores"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"jugadores"> | Date | string
   equipos?: Prisma.XOR<Prisma.EquiposScalarRelationFilter, Prisma.equiposWhereInput>
   posiciones?: Prisma.XOR<Prisma.PosicionesScalarRelationFilter, Prisma.posicionesWhereInput>
 }
@@ -260,6 +276,8 @@ export type jugadoresOrderByWithRelationInput = {
   numero?: Prisma.SortOrder
   posicion_id?: Prisma.SortOrder
   equipo_id?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   equipos?: Prisma.equiposOrderByWithRelationInput
   posiciones?: Prisma.posicionesOrderByWithRelationInput
   _relevance?: Prisma.jugadoresOrderByRelevanceInput
@@ -277,6 +295,8 @@ export type jugadoresWhereUniqueInput = Prisma.AtLeast<{
   numero?: Prisma.IntFilter<"jugadores"> | number
   posicion_id?: Prisma.IntFilter<"jugadores"> | number
   equipo_id?: Prisma.IntFilter<"jugadores"> | number
+  created_at?: Prisma.DateTimeFilter<"jugadores"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"jugadores"> | Date | string
   equipos?: Prisma.XOR<Prisma.EquiposScalarRelationFilter, Prisma.equiposWhereInput>
   posiciones?: Prisma.XOR<Prisma.PosicionesScalarRelationFilter, Prisma.posicionesWhereInput>
 }, "id" | "dni" | "equipo_id_numero">
@@ -289,6 +309,8 @@ export type jugadoresOrderByWithAggregationInput = {
   numero?: Prisma.SortOrder
   posicion_id?: Prisma.SortOrder
   equipo_id?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   _count?: Prisma.jugadoresCountOrderByAggregateInput
   _avg?: Prisma.jugadoresAvgOrderByAggregateInput
   _max?: Prisma.jugadoresMaxOrderByAggregateInput
@@ -307,6 +329,8 @@ export type jugadoresScalarWhereWithAggregatesInput = {
   numero?: Prisma.IntWithAggregatesFilter<"jugadores"> | number
   posicion_id?: Prisma.IntWithAggregatesFilter<"jugadores"> | number
   equipo_id?: Prisma.IntWithAggregatesFilter<"jugadores"> | number
+  created_at?: Prisma.DateTimeWithAggregatesFilter<"jugadores"> | Date | string
+  updated_at?: Prisma.DateTimeWithAggregatesFilter<"jugadores"> | Date | string
 }
 
 export type jugadoresCreateInput = {
@@ -314,6 +338,8 @@ export type jugadoresCreateInput = {
   dni: string
   edad: number
   numero: number
+  created_at?: Date | string
+  updated_at?: Date | string
   equipos: Prisma.equiposCreateNestedOneWithoutJugadoresInput
   posiciones: Prisma.posicionesCreateNestedOneWithoutJugadoresInput
 }
@@ -326,6 +352,8 @@ export type jugadoresUncheckedCreateInput = {
   numero: number
   posicion_id: number
   equipo_id: number
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type jugadoresUpdateInput = {
@@ -333,6 +361,8 @@ export type jugadoresUpdateInput = {
   dni?: Prisma.StringFieldUpdateOperationsInput | string
   edad?: Prisma.IntFieldUpdateOperationsInput | number
   numero?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   equipos?: Prisma.equiposUpdateOneRequiredWithoutJugadoresNestedInput
   posiciones?: Prisma.posicionesUpdateOneRequiredWithoutJugadoresNestedInput
 }
@@ -345,6 +375,8 @@ export type jugadoresUncheckedUpdateInput = {
   numero?: Prisma.IntFieldUpdateOperationsInput | number
   posicion_id?: Prisma.IntFieldUpdateOperationsInput | number
   equipo_id?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type jugadoresCreateManyInput = {
@@ -355,6 +387,8 @@ export type jugadoresCreateManyInput = {
   numero: number
   posicion_id: number
   equipo_id: number
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type jugadoresUpdateManyMutationInput = {
@@ -362,6 +396,8 @@ export type jugadoresUpdateManyMutationInput = {
   dni?: Prisma.StringFieldUpdateOperationsInput | string
   edad?: Prisma.IntFieldUpdateOperationsInput | number
   numero?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type jugadoresUncheckedUpdateManyInput = {
@@ -372,6 +408,8 @@ export type jugadoresUncheckedUpdateManyInput = {
   numero?: Prisma.IntFieldUpdateOperationsInput | number
   posicion_id?: Prisma.IntFieldUpdateOperationsInput | number
   equipo_id?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type JugadoresListRelationFilter = {
@@ -403,6 +441,8 @@ export type jugadoresCountOrderByAggregateInput = {
   numero?: Prisma.SortOrder
   posicion_id?: Prisma.SortOrder
   equipo_id?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type jugadoresAvgOrderByAggregateInput = {
@@ -421,6 +461,8 @@ export type jugadoresMaxOrderByAggregateInput = {
   numero?: Prisma.SortOrder
   posicion_id?: Prisma.SortOrder
   equipo_id?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type jugadoresMinOrderByAggregateInput = {
@@ -431,6 +473,8 @@ export type jugadoresMinOrderByAggregateInput = {
   numero?: Prisma.SortOrder
   posicion_id?: Prisma.SortOrder
   equipo_id?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type jugadoresSumOrderByAggregateInput = {
@@ -530,6 +574,8 @@ export type jugadoresCreateWithoutEquiposInput = {
   dni: string
   edad: number
   numero: number
+  created_at?: Date | string
+  updated_at?: Date | string
   posiciones: Prisma.posicionesCreateNestedOneWithoutJugadoresInput
 }
 
@@ -540,6 +586,8 @@ export type jugadoresUncheckedCreateWithoutEquiposInput = {
   edad: number
   numero: number
   posicion_id: number
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type jugadoresCreateOrConnectWithoutEquiposInput = {
@@ -579,6 +627,8 @@ export type jugadoresScalarWhereInput = {
   numero?: Prisma.IntFilter<"jugadores"> | number
   posicion_id?: Prisma.IntFilter<"jugadores"> | number
   equipo_id?: Prisma.IntFilter<"jugadores"> | number
+  created_at?: Prisma.DateTimeFilter<"jugadores"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"jugadores"> | Date | string
 }
 
 export type jugadoresCreateWithoutPosicionesInput = {
@@ -586,6 +636,8 @@ export type jugadoresCreateWithoutPosicionesInput = {
   dni: string
   edad: number
   numero: number
+  created_at?: Date | string
+  updated_at?: Date | string
   equipos: Prisma.equiposCreateNestedOneWithoutJugadoresInput
 }
 
@@ -596,6 +648,8 @@ export type jugadoresUncheckedCreateWithoutPosicionesInput = {
   edad: number
   numero: number
   equipo_id: number
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type jugadoresCreateOrConnectWithoutPosicionesInput = {
@@ -631,6 +685,8 @@ export type jugadoresCreateManyEquiposInput = {
   edad: number
   numero: number
   posicion_id: number
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type jugadoresUpdateWithoutEquiposInput = {
@@ -638,6 +694,8 @@ export type jugadoresUpdateWithoutEquiposInput = {
   dni?: Prisma.StringFieldUpdateOperationsInput | string
   edad?: Prisma.IntFieldUpdateOperationsInput | number
   numero?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   posiciones?: Prisma.posicionesUpdateOneRequiredWithoutJugadoresNestedInput
 }
 
@@ -648,6 +706,8 @@ export type jugadoresUncheckedUpdateWithoutEquiposInput = {
   edad?: Prisma.IntFieldUpdateOperationsInput | number
   numero?: Prisma.IntFieldUpdateOperationsInput | number
   posicion_id?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type jugadoresUncheckedUpdateManyWithoutEquiposInput = {
@@ -657,6 +717,8 @@ export type jugadoresUncheckedUpdateManyWithoutEquiposInput = {
   edad?: Prisma.IntFieldUpdateOperationsInput | number
   numero?: Prisma.IntFieldUpdateOperationsInput | number
   posicion_id?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type jugadoresCreateManyPosicionesInput = {
@@ -666,6 +728,8 @@ export type jugadoresCreateManyPosicionesInput = {
   edad: number
   numero: number
   equipo_id: number
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type jugadoresUpdateWithoutPosicionesInput = {
@@ -673,6 +737,8 @@ export type jugadoresUpdateWithoutPosicionesInput = {
   dni?: Prisma.StringFieldUpdateOperationsInput | string
   edad?: Prisma.IntFieldUpdateOperationsInput | number
   numero?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   equipos?: Prisma.equiposUpdateOneRequiredWithoutJugadoresNestedInput
 }
 
@@ -683,6 +749,8 @@ export type jugadoresUncheckedUpdateWithoutPosicionesInput = {
   edad?: Prisma.IntFieldUpdateOperationsInput | number
   numero?: Prisma.IntFieldUpdateOperationsInput | number
   equipo_id?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type jugadoresUncheckedUpdateManyWithoutPosicionesInput = {
@@ -692,6 +760,8 @@ export type jugadoresUncheckedUpdateManyWithoutPosicionesInput = {
   edad?: Prisma.IntFieldUpdateOperationsInput | number
   numero?: Prisma.IntFieldUpdateOperationsInput | number
   equipo_id?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -704,6 +774,8 @@ export type jugadoresSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   numero?: boolean
   posicion_id?: boolean
   equipo_id?: boolean
+  created_at?: boolean
+  updated_at?: boolean
   equipos?: boolean | Prisma.equiposDefaultArgs<ExtArgs>
   posiciones?: boolean | Prisma.posicionesDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["jugadores"]>
@@ -718,9 +790,11 @@ export type jugadoresSelectScalar = {
   numero?: boolean
   posicion_id?: boolean
   equipo_id?: boolean
+  created_at?: boolean
+  updated_at?: boolean
 }
 
-export type jugadoresOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nombre" | "dni" | "edad" | "numero" | "posicion_id" | "equipo_id", ExtArgs["result"]["jugadores"]>
+export type jugadoresOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nombre" | "dni" | "edad" | "numero" | "posicion_id" | "equipo_id" | "created_at" | "updated_at", ExtArgs["result"]["jugadores"]>
 export type jugadoresInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   equipos?: boolean | Prisma.equiposDefaultArgs<ExtArgs>
   posiciones?: boolean | Prisma.posicionesDefaultArgs<ExtArgs>
@@ -740,6 +814,8 @@ export type $jugadoresPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     numero: number
     posicion_id: number
     equipo_id: number
+    created_at: Date
+    updated_at: Date
   }, ExtArgs["result"]["jugadores"]>
   composites: {}
 }
@@ -1118,6 +1194,8 @@ export interface jugadoresFieldRefs {
   readonly numero: Prisma.FieldRef<"jugadores", 'Int'>
   readonly posicion_id: Prisma.FieldRef<"jugadores", 'Int'>
   readonly equipo_id: Prisma.FieldRef<"jugadores", 'Int'>
+  readonly created_at: Prisma.FieldRef<"jugadores", 'DateTime'>
+  readonly updated_at: Prisma.FieldRef<"jugadores", 'DateTime'>
 }
     
 

@@ -994,7 +994,9 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const CanchasScalarFieldEnum = {
   id: 'id',
   nombre: 'nombre',
-  direccion: 'direccion'
+  direccion: 'direccion',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 } as const
 
 export type CanchasScalarFieldEnum = (typeof CanchasScalarFieldEnum)[keyof typeof CanchasScalarFieldEnum]
@@ -1005,7 +1007,9 @@ export const EquiposScalarFieldEnum = {
   nombre: 'nombre',
   color: 'color',
   liga_id: 'liga_id',
-  usuario_id: 'usuario_id'
+  usuario_id: 'usuario_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 } as const
 
 export type EquiposScalarFieldEnum = (typeof EquiposScalarFieldEnum)[keyof typeof EquiposScalarFieldEnum]
@@ -1018,7 +1022,9 @@ export const JugadoresScalarFieldEnum = {
   edad: 'edad',
   numero: 'numero',
   posicion_id: 'posicion_id',
-  equipo_id: 'equipo_id'
+  equipo_id: 'equipo_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 } as const
 
 export type JugadoresScalarFieldEnum = (typeof JugadoresScalarFieldEnum)[keyof typeof JugadoresScalarFieldEnum]
@@ -1037,7 +1043,8 @@ export const LigasScalarFieldEnum = {
   id: 'id',
   nombre: 'nombre',
   creador_id: 'creador_id',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 } as const
 
 export type LigasScalarFieldEnum = (typeof LigasScalarFieldEnum)[keyof typeof LigasScalarFieldEnum]
@@ -1049,7 +1056,9 @@ export const PartidosScalarFieldEnum = {
   equipo_visitante_id: 'equipo_visitante_id',
   cancha_id: 'cancha_id',
   fecha: 'fecha',
-  hora: 'hora'
+  hora: 'hora',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 } as const
 
 export type PartidosScalarFieldEnum = (typeof PartidosScalarFieldEnum)[keyof typeof PartidosScalarFieldEnum]
@@ -1057,7 +1066,9 @@ export type PartidosScalarFieldEnum = (typeof PartidosScalarFieldEnum)[keyof typ
 
 export const PosicionesScalarFieldEnum = {
   id: 'id',
-  nombre: 'nombre'
+  nombre: 'nombre',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 } as const
 
 export type PosicionesScalarFieldEnum = (typeof PosicionesScalarFieldEnum)[keyof typeof PosicionesScalarFieldEnum]
@@ -1068,7 +1079,8 @@ export const UsuariosScalarFieldEnum = {
   nombre: 'nombre',
   email: 'email',
   password: 'password',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 } as const
 
 export type UsuariosScalarFieldEnum = (typeof UsuariosScalarFieldEnum)[keyof typeof UsuariosScalarFieldEnum]

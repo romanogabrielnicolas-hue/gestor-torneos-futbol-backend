@@ -9,10 +9,12 @@ datasource db {
 }
 
 model canchas {
-  id        Int        @id @default(autoincrement())
-  nombre    String     @unique(map: "uq_canchas_nombre") @db.VarChar(100)
-  direccion String     @db.VarChar(150)
-  partidos  partidos[]
+  id         Int        @id @default(autoincrement())
+  nombre     String     @unique(map: "uq_canchas_nombre") @db.VarChar(100)
+  direccion  String     @db.VarChar(150)
+  partidos   partidos[]
+  created_at DateTime   @default(now()) @db.Timestamp(0)
+  updated_at DateTime   @updatedAt @db.Timestamp(0)
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -26,6 +28,8 @@ model equipos {
   jugadores                                      jugadores[]
   partidos_partidos_equipo_local_idToequipos     partidos[]    @relation("partidos_equipo_local_idToequipos")
   partidos_partidos_equipo_visitante_idToequipos partidos[]    @relation("partidos_equipo_visitante_idToequipos")
+  created_at                                     DateTime      @default(now()) @db.Timestamp(0)
+  updated_at                                     DateTime      @updatedAt @db.Timestamp(0)
 
   @@unique([liga_id, nombre], map: "uq_equipos_liga_nombre")
   @@index([liga_id, usuario_id], map: "fk_equipos_membresia")
@@ -41,6 +45,8 @@ model jugadores {
   equipo_id   Int
   equipos     equipos    @relation(fields: [equipo_id], references: [id], map: "fk_jugadores_equipo")
   posiciones  posiciones @relation(fields: [posicion_id], references: [id], map: "fk_jugadores_posicion")
+  created_at  DateTime   @default(now()) @db.Timestamp(0)
+  updated_at  DateTime   @updatedAt @db.Timestamp(0)
 
   @@unique([equipo_id, numero], map: "uq_jugadores_equipo_numero")
   @@index([posicion_id], map: "fk_jugadores_posicion")
@@ -64,6 +70,7 @@ model ligas {
   nombre        String          @unique(map: "uq_ligas_nombre") @db.VarChar(100)
   creador_id    Int
   created_at    DateTime        @default(now()) @db.Timestamp(0)
+  updated_at    DateTime        @updatedAt @db.Timestamp(0)
   liga_usuarios liga_usuarios[]
   usuarios      usuarios        @relation(fields: [creador_id], references: [id], map: "fk_ligas_creador")
 
@@ -80,6 +87,8 @@ model partidos {
   canchas                                       canchas  @relation(fields: [cancha_id], references: [id], map: "fk_partidos_cancha")
   equipos_partidos_equipo_local_idToequipos     equipos  @relation("partidos_equipo_local_idToequipos", fields: [equipo_local_id], references: [id], onUpdate: Restrict, map: "fk_partidos_local")
   equipos_partidos_equipo_visitante_idToequipos equipos  @relation("partidos_equipo_visitante_idToequipos", fields: [equipo_visitante_id], references: [id], onUpdate: Restrict, map: "fk_partidos_visitante")
+  created_at                                    DateTime @default(now()) @db.Timestamp(0)
+  updated_at                                    DateTime @updatedAt @db.Timestamp(0)
 
   @@unique([cancha_id, fecha, hora], map: "uq_partidos_cancha_fecha_hora")
   @@index([equipo_local_id], map: "fk_partidos_local")
@@ -87,9 +96,11 @@ model partidos {
 }
 
 model posiciones {
-  id        Int         @id @default(autoincrement())
-  nombre    String      @unique(map: "uq_posiciones_nombre") @db.VarChar(50)
-  jugadores jugadores[]
+  id         Int         @id @default(autoincrement())
+  nombre     String      @unique(map: "uq_posiciones_nombre") @db.VarChar(50)
+  jugadores  jugadores[]
+  created_at DateTime    @default(now()) @db.Timestamp(0)
+  updated_at DateTime    @updatedAt @db.Timestamp(0)
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -99,6 +110,7 @@ model usuarios {
   email         String          @unique(map: "uq_usuarios_email") @db.VarChar(150)
   password      String          @db.VarChar(255)
   created_at    DateTime        @default(now()) @db.Timestamp(0)
+  updated_at    DateTime        @updatedAt @db.Timestamp(0)
   liga_usuarios liga_usuarios[]
   ligas         ligas[]
 }
